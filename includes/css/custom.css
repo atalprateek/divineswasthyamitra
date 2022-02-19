@@ -1,0 +1,72 @@
+/* CSS Document */
+.hidden{
+    display: none;
+}
+
+.btn-xs{
+    height: 30px;
+    width: 30px;
+    padding: 3px 4px 4px 5px;
+}
+.td-center{
+    text-align: center;
+    vertical-align: middle !important;
+}
+.small-logo{
+    display: none;
+}
+.questionlist{
+    list-style: none;
+}
+.questionlist>li{
+    box-shadow: 0px 1px 5px 1px #ccc;
+    padding: 5px 15px;
+    margin: 5px 0px;
+}
+.questionlist>li .question{
+    margin: 10px 15px;
+}
+.questionlist>li .question .qno{
+    float: left;
+    margin: -1px 10px 0px -20px;
+}
+.questionlist>li .options{
+    margin: 10px 15px;
+}
+.questionlist>li .options>ol{
+    
+}
+.questionlist>li .options>ol>li{
+    margin: 5px;
+}
+.questionlist>li .answer{
+    margin: 10px 15px;
+}
+.questionlist>li .answer p{
+    font-size: 16px;
+}
+@media (max-width: 992px){
+    .large-logo{
+        display: none !important;
+    }
+    .small-logo{
+        display: block !important;
+        max-width: 70vw;
+    }
+}
+@media (max-width: 768px){
+    .small-logo{
+        max-width: 90vw;
+    }
+    .navbar-logo{
+        padding: 3px !important;
+    }
+}
+@media (max-width: 575px){
+    .small-logo{
+        max-width: 95vw;
+    }
+    .navbar-logo{
+        padding: 5px !important;
+    }
+}
