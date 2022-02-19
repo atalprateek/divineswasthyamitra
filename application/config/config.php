@@ -28,7 +28,7 @@ if(isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST']=='localhost'){
     $config['base_url'] = 'http://localhost/projects/swasthyamitra';
 }
 else{
-    $config['base_url'] = "http://$_SERVER[HTTP_HOST]";
+    $config['base_url'] = "https://$_SERVER[HTTP_HOST]";
 }
 
 /*
