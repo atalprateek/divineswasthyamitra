@@ -119,7 +119,7 @@ if(isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST']=='localhost'){
 }
 else{
 	defined('DB_HOST')      ? null : define('DB_HOST', 'localhost');
-	defined('DB_USER')      ? null : define('DB_USER', '');
-	defined('DB_PASSWORD')  ? null : define('DB_PASS', '');
-	defined('DB_NAME')      ? null : define('DB_NAME', '');
+	defined('DB_USER')      ? null : define('DB_USER', 'divines0_divine');
+	defined('DB_PASSWORD')  ? null : define('DB_PASS', 'Divine@123#');
+	defined('DB_NAME')      ? null : define('DB_NAME', 'divines0_divine');
 }
