@@ -9,7 +9,11 @@ class Home extends CI_Controller {
 	
 	public function index(){
         $data['title']="Home";
-        $this->load->view('website/test');
+		$this->load->view('website/includes/top-section',$data);
+		$this->load->view('website/includes/header');
+		$this->load->view('website/pages/home');
+		$this->load->view('website/includes/footer');
+		$this->load->view('website/includes/bottom-section');
         /*$data['blogs']=$this->blog->getblogs(array("status"=>1),"id desc",4);
         $data['testimonials']=$this->website->gettestimonials(array("status"=>1));
         $data['subjects']=$this->masterkey->getsubjects(array("status"=>1));

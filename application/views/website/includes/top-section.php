@@ -1,21 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Required meta tags -->
+        <title><?= $title.' | '.PROJECT_NAME; ?> </title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="shortcut icon" href="<?= file_url("assets/images/logo.png"); ?>">
-        <title><?= $title; ?> | Mybpscexam.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap 3.4.1 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <!-- Google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700" rel="stylesheet">
-        <!-- <link rel="stylesheet" type="text/css" href="css/animate.css"> -->
-        <link rel="stylesheet" type="text/css" href="<?= file_url("assets/css/style.css"); ?>">
+        <!-- Fontawsome icon -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- image and video gallery -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+        <!-- Swiper Slider -->
+        <link rel="stylesheet" type="text/css" href="<?= file_url('assets/css/swiper-bundle.min.css'); ?>">
+        <script type="text/javascript" src="<?= file_url('assets/js/swiper-bundle.min.js'); ?>"></script>
+
+        <script type="text/javascript" src="<?= file_url('assets/js/main.js'); ?>"></script>
+        <script type="text/javascript" src="<?= file_url('assets/js/script.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?= file_url('assets/css/style.css'); ?>">
         <?php
 			if(!empty($styles)){
 				foreach($styles as $key=>$style){
@@ -71,8 +82,5 @@
                 }
             }
         ?>
-        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-        <meta name="google-signin-client_id" content="508123984538-1644t8nigo0upoma33h0gk83jpefjp6i.apps.googleusercontent.com">
-
     </head>
-    <body>
+    <body id="top">

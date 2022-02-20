@@ -1,96 +1,102 @@
 
-        <section class="nav-up">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-12">
-                        <span><strong style="color:#fff;"><i class="far fa-envelope"></i> : </strong><a href="mailto:mybpscexam@gmail.com">mybpscexam@gmail.com</a></span>
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top font-tnr">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>                        
+                        </button>
+                        <a class="navbar-brand" href="<?= base_url(); ?>">
+                            <img class="brand" src="<?= file_url('assets/images/logo.png'); ?>">
+                        </a>
                     </div>
-                    <div class="col-md-3 col-12">
-                        <span><strong style="color:#fff;"><i class="fas fa-mobile-alt"></i> : </strong><a href="tel:01234567890"> 01234567890</a></span>
+                    <div class="collapse navbar-collapse mainmenu" id="myNavbar">
+                        <ul id="menu-header-menu" class="menu">   
+                            <a href="tel:"><li><i class="fa fa-phone" aria-hidden="true"></i> 1800 XXX XXXX</li></a> 
+                            <a href="#"><li class="btn btn-round clr1">Request a Call Back</li></a> 
+                            <a href="#"><li class="btn btn-round clr2">Schedule a Home Visit</li></a>    
+                            <a href="#"><li class="btn btn-round clr2">Feedback</li></a>      
+                            <a href="#"><li><i class="fa fa-facebook-official" aria-hidden="true"></i></li></a>
+                            <a href="#"><li><i class="fa fa-twitter" aria-hidden="true"></i></li></a>
+                            <a href="#"><li><i class="fa fa-instagram" aria-hidden="true"></i></li></a>
+                            <a href="#"><li><i class="fa fa-linkedin" aria-hidden="true"></i></li></a>
+                            <a href="#"><li><i class="fa fa-youtube-play" aria-hidden="true"></i></li></a>
+                        </ul>
                     </div>
-                    <div class="col-md-3 col-12">
-                        <div class="social-icon">
-                            <span><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></a>&nbsp;&nbsp;<a href="https://www.whatsapp.com" target="_blank"><i class="fab fa-whatsapp-square"></i></a>&nbsp;&nbsp;<a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter-square"></i></a>&nbsp;&nbsp;<a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>&nbsp;&nbsp;<a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a></span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <span>
-                            <strong style="color:#fff;"><i class="fas fa-user-alt"></i> : </strong>
-                            <?php if($this->session->user===NULL || $this->session->role!=='student'){ ?>
-                            <a href="#" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#staticBackdrop">Login</a>
-                            <?php }else{
-                            ?>
-                            <a href="<?= base_url('profile/'); ?>" type="button" class="btn btn-sm btn-success">Profile</a>
-                            <a href="<?= base_url('logout/') ?>" onClick="googleSignOut();"><i class="fas fa-sign-out-alt"></i></a>
-                            <?php
-                                } 
-                            ?>
-                        </span>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
-            </div>
-        </section>
-        
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="<?= base_url('/'); ?>">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="<?= file_url('assets/images/logo.png'); ?>" alt="logo0" class="img-fluid" max-width="200" max-height="30">
-                        </div>
-                    </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('/'); ?>">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('home/syllabus'); ?>">Syllabus</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('subjects/'); ?>">BPSC-Prelims</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">BPSC-Mains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Bihar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Our Store</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('blogs/'); ?>">Blogs</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                            More
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="<?= base_url('aboutus/'); ?>">About Us</a>
-                                <a class="dropdown-item" href="<?= base_url('contactus/'); ?>">Contact Us</a>
-                                <a class="dropdown-item" href="<?= base_url('joinus/'); ?>">Join Us</a>
-                                <a class="dropdown-item" href="<?= base_url('privacypolicy/'); ?>">Privacy Policy</a>
+                <div class="container-fluid whiteTXT btcats">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 menucont">
+                                <ul class="menu m_on cusmmenu">
+                                    <li class="showallcat"><a><i class="fa fa-th-large" aria-hidden="true"></i> Menu</a></li>
+                                </ul>
+                                <ul id="header-categoris" class="menu">
+                                    <li class="menu-item"><a href="<?= base_url(); ?>">Home</a></li>
+                                    <li class="menu-item"><a href="#">About</a></li>
+                                    <li class="menu-item menu-item-has-children has-sub"><a href="#" data-toggle="modal" data-target="#servicemodal">Services</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children has-sub col2"><a href="#">Elder Care</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children has-sub col2"><a href="#">Why Home Care?</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children has-sub"><a href="#">Family Speaks</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children has-sub"><a href="#">Careers</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                            <li class="menu-item"><a href="#">Sub Category</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        <?php 
-            if($this->session->user===NULL || $this->session->role!=='student'){
-                $this->load->view('website/modal/login'); 
-            }
-            else{
-                echo '
-                    <div class="google-div d-none">
-                        <div class="g-signin2" id="my-signin2" data-onsuccess="onGoogleSignIn"></div>
-                    </div>';
-            }
-        ?>
+            </nav>
+        </header>
+        <!-- Header end -->
