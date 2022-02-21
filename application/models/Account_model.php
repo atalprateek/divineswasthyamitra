@@ -41,6 +41,9 @@ class Account_model extends CI_Model{
         if(isset($data['role'])){
             $where['role']=$data['role'];
         }
+        else{
+            $where="(username='$username' or mobile='$username' or email='$username') and role!='admin'";
+        }
         $flag=true;
         $msg="Wrong Username or Password!";
         $query=$this->db->get_where("users",$where);

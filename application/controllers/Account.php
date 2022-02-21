@@ -19,32 +19,77 @@ class Account extends CI_Controller {
 		$this->load->view('website/includes/bottom-section');
 	}
     
+	public function signup(){
+        $data['title']="Sign Up";
+		$this->load->view('website/includes/top-section',$data);
+		$this->load->view('website/includes/header');
+		$this->load->view('website/pages/signup');
+		$this->load->view('website/includes/footer');
+		$this->load->view('website/includes/bottom-section');
+	}
+    
+	public function enterotp(){
+        if($this->session->mobile===NULL){
+            redirect('/');
+        }
+        $data['title']="Enter OTP";
+		$this->load->view('website/includes/top-section',$data);
+		$this->load->view('website/includes/header');
+		$this->load->view('website/pages/enterotp');
+		$this->load->view('website/includes/footer');
+		$this->load->view('website/includes/bottom-section');
+	}
+    
     public function register(){
         if($this->input->post('register')!==NULL){
             $data=$this->input->post();
-            unset($data['register'],$data['repassword']);
-            $mobile=$data['mobile'];
-            $data['username']=$data['mobile'];
-            $data['role']='student';
-            $result=$this->account->register($data);
+            $refcode=$data['refcode'];
+            $refid=$this->member->getrefid($refcode);
+            if($refid['status']===false){
+                $this->session->set_flashdata("reg_err","Invalid Referral Code!");
+                redirect('signup/');
+            }
+            else{
+                $data['refid']=$refid['user_id'];
+            }
+            
+            $userdata=array(
+                        "username"=>$data['mobile'],
+                        "name"=>$data['name'],
+                        "mobile"=>$data['mobile'],
+                        "email"=>$data['email'],
+                        "password"=>$data['password'],
+                        "role"=>'member',
+                        "created_on"=>date('Y-m-d H:i:s'),
+                        "updated_on"=>date('Y-m-d H:i:s'),
+                        "status"=>0
+                        );
+            $result=$this->account->register($userdata);
             if($result['status']===true){
-                $this->session->set_userdata('mobile',$data['mobile']);
-                $where=array("username"=>$data['mobile']);
+                $mobile=$data['mobile'];
+                $this->session->set_userdata('mobile',$mobile);
+                $where=array("username"=>$mobile);
                 $smsresult=$this->sendotp($where);
                 if($smsresult['status']===false){
                     
                 }
-                $result=array("status"=>true,"otp"=>$smsresult['message']);
-                echo json_encode($result);
-                //redirect('enterotp/');
+                $otp=$smsresult['message'];
+                $memberdata=array(
+                            "name"=>$data['name'],
+                            "mobile"=>$data['mobile'],
+                            "email"=>$data['email'],
+                            "gender"=>$data['gender'],
+                            "refid"=>$data['refid'],
+                            "user_id"=>$result['user_id']
+                            );
+                $result2=$this->member->addmember($memberdata);
+                redirect('enterotp/'.$otp);
             }
             else{
-                $error=$result['message'];
-                $result=array("status"=>false,"message"=>$error);
-                echo json_encode($result);
+                $this->session->set_flashdata("reg_err",$result['message']);
             }
         }
-        //redirect('signup/');
+        redirect('signup/');
     }
     
     public function sendotp($where){
@@ -58,6 +103,7 @@ class Account extends CI_Controller {
             if($type!='activate'){
                 //resetpassword($mobile,$name,$otp);
                 //$sms="$otp is your OTP to activate ".PROJECT_NAME." account.";
+                $sms="One time password for mobile verification is $result[otp].";
             }
             else{
                 //loginotp($mobile,$otp);
@@ -78,7 +124,7 @@ class Account extends CI_Controller {
     }
     
     public function verifyotp(){
-        if($this->input->post('verifyotp')!==NULL){
+        if($this->input->post('verifyotp')!==NULL && $this->session->mobile!==NULL){
             $otp=$this->input->post('otp');
             $mobile=$this->session->mobile;
             $where['username']=$mobile;
@@ -94,23 +140,22 @@ class Account extends CI_Controller {
                     $this->session->unset_userdata('redirect'); 
                 }
                 $result=array("status"=>true,"message"=>"Verified","redirecturl"=>$redirecturl);
-                echo json_encode($result);
+                redirect('/');
             }
             else{
-                $error=$result['message'];
-                $result=array("status"=>false,"message"=>$error);
-                echo json_encode($result);
+                $this->session->set_flashdata("log_err",$result['message']);
             }
         }
-        //redirect('enterotp/');
+        else{
+            redirect('login/');
+        }
+        redirect('enterotp/');
     }
     
 	public function validatelogin(){
         if($this->input->post('login')!==NULL){
             $data=$this->input->post();
             unset($data['login']);
-            echo PRE; print_r($data);die;
-            $data['role']='student';
             $result=$this->account->login($data);
             if($result['status']===true){
                 $this->startsession($result['user']);
@@ -120,7 +165,7 @@ class Account extends CI_Controller {
                     $this->session->unset_userdata('redirect'); 
                 }
                 $result=array("status"=>true,"message"=>"Logged In","redirecturl"=>$redirecturl);
-                echo json_encode($result);
+                redirect('/');
             }
             elseif($result['status']===false && $result['message']=='Account not Verified!'){
                 $this->session->set_userdata('mobile',$data['username']);
@@ -130,14 +175,15 @@ class Account extends CI_Controller {
                     
                 }
                 $result=array("status"=>true,"message"=>$result['message'],"otp"=>$smsresult['message']);
-                echo json_encode($result);
+                redirect('enterotp/'.$smsresult['message']);
             }
             else{ 
                 $result=array("status"=>false,"message"=>$result['message']);
-                echo json_encode($result);
+                //echo json_encode($result);
+                $this->session->set_flashdata("log_err",$result['message']);
             }
         }
-        //redirect('login/');
+        redirect('login/');
 	}
     
 	public function startsession($result){

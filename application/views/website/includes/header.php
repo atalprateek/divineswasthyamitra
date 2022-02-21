@@ -20,7 +20,19 @@
                             <a href="#"><li><i class="fa fa-instagram" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-linkedin" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-youtube-play" aria-hidden="true"></i></li></a>
-                            <a href="<?= base_url('login/'); ?>"><li class="btn btn-round clr1">Login</li></a>    
+                            <?php
+                                if($this->session->user===NULL || ($this->session->role!='member' && $this->session->role!='hca')){
+                            ?>
+                            <a href="<?= base_url('signup/'); ?>"><li class="btn btn-round clr1">Sign Up</li></a>   
+                            <a href="<?= base_url('login/'); ?>"><li class="btn btn-round clr1">Login</li></a>   
+                            <?php
+                                }
+                                else{
+                            ?>
+                            <a href="<?= base_url('logout/'); ?>"><li class="btn btn-round clr1">Logout</li></a>   
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>

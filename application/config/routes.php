@@ -58,6 +58,9 @@ $route['contactus']='home/contactus';
 $route['privacypolicy']='home/privacypolicy';
 
 $route['login']='account/index';
+$route['signup']='account/signup';
+$route['enterotp']='account/enterotp';
+$route['enterotp/(:num)']='account/enterotp';
 $route['register']='account/register';
 $route['verifyotp']='account/verifyotp';
 $route['validatelogin']='account/validatelogin';

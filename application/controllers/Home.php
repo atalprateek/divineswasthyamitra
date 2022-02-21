@@ -36,7 +36,7 @@ class Home extends CI_Controller {
     
     public function runquery(){
         $query=array(
-                    "");
+                    "ALTER TABLE `sm_users` CHANGE `otp` `otp` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;");
         foreach($query as $sql){
             if(!$this->db->query($sql)){
                 print_r($this->db->error());
