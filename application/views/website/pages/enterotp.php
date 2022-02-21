@@ -10,7 +10,7 @@
                                 <h3 class="text-center">Enter OTP</h3>
                                 <div class="form-group pos_rel">
                                     <label for="">OTP</label>
-                                    <input id="otp" name="otp" type="password" placeholder="OTP" class="form-control lgn_input" autocomplete="off" required>
+                                    <input id="otp" name="otp" type="password" placeholder="OTP" class="form-control lgn_input" autocomplete="off" required value="<?= $this->uri->segment(2); ?>">
                                 </div>
                                 <div class="text-center text-danger"><?= $this->session->flashdata('log_err'); ?></div>
                                 <button class="btn btn-success" type="submit" name="verifyotp">Verify OTP</button>
