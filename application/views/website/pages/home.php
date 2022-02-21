@@ -40,7 +40,7 @@
           <a href="#"><div class="initem">
             <img src="<?= file_url('assets/images/4.png'); ?>">
             <h3>Doctor at Home</h3>
-            <p>Apollo's team of expert, specialized doctors</p>
+            <p><?= PROJECT_NAME ?>'s team of expert, specialized doctors</p>
             <button class="btn btn-gray btn-round">Know More</button>
           </div></a>
         </div>
@@ -89,7 +89,7 @@
           <h1 class="heading">About<br><?= PROJECT_NAME; ?></h1>
           <p>The transforming healthcare scenario in India has led to the advent of Homecare – Healthcare services that conveniently come Home for the comfort of patients and their families.</p>
 
-          <p>Apollo’s transformative journey has redefined the healthcare landscape in India over the last few decades with its mission of delivering quality healthcare to millions of Indians. In keeping with this mission, <?= PROJECT_NAME; ?>, with its unique treatment options, delivers clinical excellence with compassion and care to the comfort of your home.</p>
+          <p><?= PROJECT_NAME ?>’s transformative journey has redefined the healthcare landscape in India over the last few decades with its mission of delivering quality healthcare to millions of Indians. In keeping with this mission, <?= PROJECT_NAME; ?>, with its unique treatment options, delivers clinical excellence with compassion and care to the comfort of your home.</p>
         </div>
       </div>
     </div>
@@ -217,7 +217,7 @@
               <a href="#"><div class="initem">
                 <img src="<?= file_url('assets/images/4.png'); ?>">
                 <h3>Doctor at Home</h3>
-                <p>Apollo's team of expert, specialized doctors</p>
+                <p><?= PROJECT_NAME ?>'s team of expert, specialized doctors</p>
                 <button class="btn btn-gray btn-round">Know More</button>
               </div></a>
             </div>

@@ -1,0 +1,10 @@
+.account-form fieldset{
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #ccc;
+}
+h3{
+    margin-top: 5px;
+    margin-bottom: 15px;
+}

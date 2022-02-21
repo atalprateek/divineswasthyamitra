@@ -53,38 +53,15 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
-$route['joinus']='home/joinus';
-$route['savejoinus']='home/savejoinus';
-
 $route['aboutus']='home/aboutus';
 $route['contactus']='home/contactus';
 $route['privacypolicy']='home/privacypolicy';
-$route['syllabus']='home/syllabus';
-$route['syllabus/(:any)']='home/syllabus';
 
-$route['quiz/page']='quiz/index';
-$route['quiz/page/(:num)']='quiz/index';
-$route['subjects']='quiz/subjects';
-$route['chapters']='quiz/chapters';
-$route['chapters/(:any)']='quiz/chapters';
-$route['startquiz']='quiz/startquiz';
-$route['startquiz/(:any)']='quiz/startquiz';
-
-$route['blogs/'] = 'blogs/index';
-$route['blogs/(:any)'] = 'blogs/details';
-
+$route['login']='account/index';
 $route['register']='account/register';
 $route['verifyotp']='account/verifyotp';
 $route['validatelogin']='account/validatelogin';
 $route['logout']='account/logout';
 
-$route['bookmarks']='profile/bookmarks';
-
-$route['googleoauth']='account/googleoauth';
-
 $route['admin/logout']='admin/login/logout';
 
-$route['admin/users']='admin/home/users';
-$route['admin/joinuslist']='admin/home/joinuslist';
-$route['admin/masterkey/exams']='admin/masterkey/index';

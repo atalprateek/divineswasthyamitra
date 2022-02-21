@@ -15,14 +15,12 @@
                     <div class="collapse navbar-collapse mainmenu" id="myNavbar">
                         <ul id="menu-header-menu" class="menu">   
                             <a href="tel:"><li><i class="fa fa-phone" aria-hidden="true"></i> 1800 XXX XXXX</li></a> 
-                            <a href="#"><li class="btn btn-round clr1">Request a Call Back</li></a> 
-                            <a href="#"><li class="btn btn-round clr2">Schedule a Home Visit</li></a>    
-                            <a href="#"><li class="btn btn-round clr2">Feedback</li></a>      
                             <a href="#"><li><i class="fa fa-facebook-official" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-twitter" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-instagram" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-linkedin" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-youtube-play" aria-hidden="true"></i></li></a>
+                            <a href="<?= base_url('login/'); ?>"><li class="btn btn-round clr1">Login</li></a>    
                         </ul>
                     </div>
                 </div>
@@ -35,7 +33,7 @@
                                 </ul>
                                 <ul id="header-categoris" class="menu">
                                     <li class="menu-item"><a href="<?= base_url(); ?>">Home</a></li>
-                                    <li class="menu-item"><a href="#">About</a></li>
+                                    <li class="menu-item"><a href="<?= base_url('aboutus/'); ?>">About Us</a></li>
                                     <li class="menu-item menu-item-has-children has-sub"><a href="#" data-toggle="modal" data-target="#servicemodal">Services</a>
                                         <ul class="sub-menu">
                                             <li class="menu-item"><a href="#">Sub Category</a></li>

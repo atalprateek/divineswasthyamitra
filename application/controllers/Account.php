@@ -10,6 +10,15 @@ class Account extends CI_Controller {
         //$this->cartproducts=getcart();
 	}
 	
+	public function index(){
+        $data['title']="Login";
+		$this->load->view('website/includes/top-section',$data);
+		$this->load->view('website/includes/header');
+		$this->load->view('website/pages/login');
+		$this->load->view('website/includes/footer');
+		$this->load->view('website/includes/bottom-section');
+	}
+    
     public function register(){
         if($this->input->post('register')!==NULL){
             $data=$this->input->post();
@@ -99,8 +108,8 @@ class Account extends CI_Controller {
 	public function validatelogin(){
         if($this->input->post('login')!==NULL){
             $data=$this->input->post();
-            $data['username']=$data['mobile'];
             unset($data['login']);
+            echo PRE; print_r($data);die;
             $data['role']='student';
             $result=$this->account->login($data);
             if($result['status']===true){
@@ -131,30 +140,6 @@ class Account extends CI_Controller {
         //redirect('login/');
 	}
     
-	public function googleoauth(){
-        if($this->session->user===NULL || $this->session->role!=='student'){
-            $data=$this->input->post();
-            $result=$this->account->googleoauth($data);
-            if($result['status']===true){
-                $this->startsession($result['user']);
-                $redirecturl='';
-                if($this->session->redirect!==NULL){ 
-                    $redirecturl=$this->session->redirect; 
-                    $this->session->unset_userdata('redirect'); 
-                }
-                $result=array("status"=>true,"message"=>"Logged In","redirecturl"=>$redirecturl);
-                echo json_encode($result);
-            }
-            else{
-                $result=array("status"=>false,"message"=>$result['message']);
-                echo json_encode($result);
-            }
-        }
-        else{
-            $result=array("status"=>true);
-            echo json_encode($result);
-        }
-    }
 	public function startsession($result){
 		$data['user']=md5($result['id']);
 		$data['name']=$result['name'];
