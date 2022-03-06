@@ -6,7 +6,8 @@ class Profile extends CI_Controller {
     
 	function __construct(){
 		parent::__construct();
-        $result=$this->account->getuser(array("md5(id)"=>$this->session->user,"role"=>"student"));
+        $where="md5(id)='".$this->session->user."' and (role='member' or role='hca')";
+        $result=$this->account->getuser($where);
         if($result['status']===true){
             $this->user=$result['user'];
         }
@@ -18,6 +19,13 @@ class Profile extends CI_Controller {
 	public function index(){
         $data['title']="Profile";
         $data['user']=$this->user;
+        $data['member']=$this->member->getmembers(array("t1.id"=>$data['user']['id']),"single");
+        if($this->session->role=='hca'){
+			$data['wards']=$this->member->getwards(array("hca_id"=>$data['user']['id']));
+        }
+        elseif($this->session->role=='member'){
+			$data['ward']=$this->member->getwards(array("id"=>$data['member']['ward']),"single");
+        }
 		$this->load->view('website/includes/top-section',$data);
 		$this->load->view('website/includes/header');
 		$this->load->view('website/profile/profile');
@@ -25,18 +33,87 @@ class Profile extends CI_Controller {
 		$this->load->view('website/includes/bottom-section');
 	}
     
-	public function bookmarks(){
-        $data['title']="Bookmarks";
+	public function editprofile(){
+		$data['title']="Edit Profile";
         $data['user']=$this->user;
-        $data['bookmarks']=getbookmarks();
-        $data['offset']=0;
+        $data['member']=$this->member->getmembers(array("t1.id"=>$data['user']['id']),"single");
+		$data['familymembers']=$this->member->getfamilymembers(array("user_id"=>$data['user']['id']));
+		$states=$this->website->getstate();
+		$options=array(""=>"Select State");
+		if(is_array($states)){
+			foreach($states as $state){
+				$options[$state['state']]=$state['state'];
+			}
+		}
+		$data['states']=$options;
+		//$states=$this->Location_model->getstate();
+		/*$user_id=$data['member']['user_id'];
+		$options=array(""=>"Select State");
+		if(is_array($states)){
+			foreach($states as $state){
+				$options[$state['state']]=$state['state'];
+			}
+		}
+		$data['states']=$options;
+		$memberwhere="hce_id in (select refid from ht_members where user_id='$user_id')";
+		$wards=$this->Member_model->getwards($memberwhere);
+		$options=array(""=>"Select Ward/Panchayat");
+		if(is_array($wards)){
+			foreach($wards as $ward){
+				$options[$ward['id']]=$ward['ward'];
+			}
+		}
+		$data['wards']=$options;*/
 		$this->load->view('website/includes/top-section',$data);
 		$this->load->view('website/includes/header');
-		$this->load->view('website/profile/bookmarks');
+		$this->load->view('website/profile/editprofile');
 		$this->load->view('website/includes/footer');
 		$this->load->view('website/includes/bottom-section');
 	}
-    
+	
+	public function memberlist(){
+		if($this->session->role=='hca'){
+			$data['title']="Member List";
+            $user=$this->user;
+            $member=$this->member->getmembers(array("t1.id"=>$user['id']),"single");
+			$user_id=$user['id'];
+			$where=array("t2.refid"=>$user_id,"t1.role"=>'member');
+			$data['members']=$this->member->getmembers($where);
+			$data['styles']=array("link"=>"https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css");
+			$data['top_script']=array("link"=>"https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js");
+            $this->load->view('website/includes/top-section',$data);
+            $this->load->view('website/includes/header');
+            $this->load->view('website/profile/members');
+            $this->load->view('website/includes/footer');
+            $this->load->view('website/includes/bottom-section');
+		}
+		else{ redirect('profile/'); }
+	}
+	
+	public function exportmember(){
+		$this->load->helper('excel');
+		$result=array();
+        $user=$this->user;
+        $member=$this->member->getmembers(array("t1.id"=>$user['id']),"single");
+        $user_id=$user['id'];
+        $where=array("t2.refid"=>$user_id,"t1.role"=>'member');
+		$members=$this->member->getmembers($where);
+		
+		if(is_array($members)){ $slno=0;
+			foreach($members as $value){
+				$slno++;
+				if($value['card_no']==''){ $value['card_no']='-'; }
+				else{$value['card_no']="'$value[card_no]'";}
+				if($value['name']==''){ $value['name']='-'; }
+				$member=array($slno,$value['card_no'],$value['name']);
+				$result[]=$member;
+			}
+		}
+		//print_r($result);
+		$fieldinfo=array("Sl No","Card No","Name");
+		exporttoexcel($result,$fieldinfo);
+	}
+	
     public function updateprofile(){
         if($this->input->post('updateprofile')!==NULL){
             $data=$this->input->post();
@@ -59,8 +136,8 @@ class Profile extends CI_Controller {
     public function updatepassword(){
         if($this->input->post('updatepassword')!==NULL){
             $password=$this->input->post('password');
-            $reenter=$this->input->post('reenter');
-            if($password==$reenter){
+            $retype=$this->input->post('retype');
+            if($password==$retype){
                 $result=$this->account->getuser(array("md5(id)"=>$this->session->user));
                 if($result['status']===false){
                     redirect('login/');

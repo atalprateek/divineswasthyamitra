@@ -36,7 +36,15 @@ class Home extends CI_Controller {
     
     public function runquery(){
         $query=array(
-                    "ALTER TABLE `sm_users` CHANGE `otp` `otp` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;");
+                    "CREATE TABLE `sm_member_family` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` varchar(100) NOT NULL,
+ `relation` varchar(20) NOT NULL,
+ `age` varchar(20) NOT NULL,
+ `gender` varchar(10) NOT NULL,
+ `user_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1");
         foreach($query as $sql){
             if(!$this->db->query($sql)){
                 print_r($this->db->error());

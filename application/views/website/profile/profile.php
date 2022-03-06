@@ -1,68 +1,197 @@
-  
-        <section class="affordable-homes"  style="background:#f0f0f0;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link" href="<?= base_url('profile/');?>">Profile</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?= base_url('bookmarks/');?>">Bookmarks</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-10">
-                        <h3><?= $title; ?></h3><hr style="border: 1px solid #e42121">
-                    
+
+
+    <div class="margin-tb-30px">
+        <div class="container">
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="py-15 background-white">
                         <div class="row">
-                            <div class="col-12">
-                            <div class="text-center text-success"><?= $this->session->flashdata('msg'); ?></div>
-                            <div class="text-center text-danger"><?= $this->session->flashdata('err_msg'); ?></div>
-                                <div class="h4">Personal Details</div>
-                                <?= form_open('profile/updateprofile/','id="update-form"'); ?>
-                                    <div class="form-group pos_rel">
-                                        <input id="name" name="name" type="text" placeholder="Full name" class="form-control lgn_input" required autocomplete="off" pattern="[A-Za-z ]+" title="Only alphabets are allowed" value="<?= $user['name']; ?>" readonly>
-                                        <i class="uil uil-user-circle lgn_icon"></i> 
-                                    </div>
-                                    <div class="form-group pos_rel">
-                                        <input id="mobile" name="mobile" type="text" placeholder="Mobile Number" class="form-control lgn_input" required autocomplete="off" maxlength="10"  pattern="^\d{10}$" title="Enter Valid 10-digit mobile number" value="<?= $user['mobile']; ?>" readonly>
-                                        <i class="uil uil-mobile-android-alt lgn_icon"></i> 
-                                    </div>
-                                    <div class="form-group pos_rel">
-                                        <input id="email" name="email" type="email" placeholder="Email Address (Optional)" class="form-control lgn_input" autocomplete="off" value="<?= $user['email']; ?>" readonly>
-                                        <i class="uil uil-envelope lgn_icon"></i> 
-                                    </div>
-                                    <button class="login-btn hover-btn d-none btn-success update-btn" type="submit" name="updateprofile">Update</button>
-                                    <button class="btn btn-primary login-btn hover-btn update-btn" type="button" onClick="$('#update-form input').removeAttr('readonly'); $('.update-btn').toggleClass('d-none');">Edit</button>
-                                <?= form_close(); ?>
+                            <div class="col-md-6 py-10 my-5">
+                                <div class="lead my-15">My Profile</div>
+                                <table class="profile">
+                                	<tr>
+                                        <td>Name</td>
+                                        <td><?php echo $member['name']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Mobile</td>
+                                        <td><?php echo $member['mobile']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Email</td>
+                                        <td><?php echo $member['email']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Aadhar</td>
+                                        <td><?php echo $member['aadhar']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Gender</td>
+                                        <td><?php echo $member['gender']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Age</td>
+                                        <td><?php echo $member['age']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Address</td>
+                                        <td><?php echo $member['address']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>District</td>
+                                        <td><?php echo $member['district']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>State</td>
+                                        <td><?php echo $member['state']; ?></td>
+                                    </tr>
+                                    <?php
+                                        if($this->session->role=='hca'){
+                                    ?>
+                                	<tr>
+                                        <td>Referral Code</td>
+                                        <td><?php echo $member['referral_code']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Ward/Panchayat</td>
+                                        <td>
+											<?php 
+												$w=array();
+												if(is_array($wards)){
+													foreach($wards as $ward){
+														$w[]=$ward['ward'];
+													}
+												}
+												echo implode(', ',$w);
+											?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                        }
+                                        if($this->session->role=='member'){
+                                    ?>
+                                	<tr>
+                                        <td>Ward/Panchayat</td>
+                                        <td>
+											<?php 
+												echo $ward;
+											?>
+                                        </td>
+                                    </tr>
+                                	<tr>
+                                        <td>Card No</td>
+                                        <td><?php echo $member['card_no']; ?></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                        if($member['name']!='' && $this->session->role=='member'){
+                                    ?>
+                                	<tr>
+                                        <td>Membership Status</td>
+                                        <td>
+											<?php if($this->session->paid==0){ echo "Free Registration"; }
+                                            else{ echo "Paid Member"; } ?>
+										</td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </table>
+                                <a href="<?php echo base_url('profile/editprofile/'); ?>" class="btn btn-sm btn-info">
+                                    <?php
+                                        if($member['name']==''){echo "Complete Profile";}
+                                        else{ echo "Edit Profile"; }
+                                    ?>
+                                </a>
+                                <?php
+                                    if($member['name']!='' && $this->session->role=='member' && $this->session->paid==0){
+                                ?>
+                                <a href="<?php echo base_url('profile/makepayment/');?>" class="btn btn-sm btn-primary">Make Payment</a>
+                                <?php
+                                    }
+                                    if($this->session->role=='member' && $this->session->paid==1 && $member['card_no']!=''){
+                                ?>
+                                <a href="<?php echo base_url('profile/certificate/');?>" class="btn btn-sm btn-danger">Print Certificate</a>
+                                <?php
+										if($member['cardfile']!==NULL){
+                                ?>
+                                <a href="<?php echo file_url($member['cardfile']);?>" class="btn btn-sm btn-warning" download >Download Card</a>
+                                <?php
+										}
+                                    }
+                                ?>
                             </div>
-                        </div><hr>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="h4">Change Password</div>
-                                <?= form_open('profile/updatepassword/','id="password-form" onSubmit="return validatepassword()"'); ?>
-                                    <div class="form-group pos_rel">
-                                        <input id="password" name="password" type="password" placeholder="Enter Password" class="form-control lgn_input" required autocomplete="off">
-                                        <i class="uil uil-lock lgn_icon"></i> 
-                                    </div>
-                                    <div class="form-group pos_rel">
-                                        <input id="reenter" name="reenter" type="password" placeholder="Re-Enter Password" class="form-control lgn_input" required autocomplete="off">
-                                        <i class="uil uil-lock lgn_icon"></i> 
-                                    </div>
-                                    <button class="login-btn btn-success hover-btn" type="submit" name="updatepassword">Update</button>
-                                <?= form_close(); ?>
+                            <?php
+								if($this->session->role!='member'){
+							?>
+                            <div class="col-md-6 py-10 my-5">
+                                <div class="lead my-15">Members</div>
+                                <table class="profile">
+									<?php
+                                        if(isset($abms)){
+									?>
+                                	<tr>
+                                        <td width="60%">Total ABMS</td>
+                                        <td><?php echo $abms; ?></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                        if(isset($hces)){
+									?>
+                                	<tr>
+                                        <td width="60%">Total HCES</td>
+                                        <td><?php echo $hces; ?></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                        if(isset($members)){
+									?>
+                                	<tr>
+                                        <td width="60%">Total Paid Members</td>
+                                        <td><?php echo $members['paid_members']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Total Free Members</td>
+                                        <td><?php echo $members['free_members']; ?></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                              	</table>
+                                <a href="<?php echo base_url('profile/memberlist/'); ?>" class="btn btn-sm btn-danger">View Members</a>
                             </div>
+                            <?php
+								}
+							?>
                         </div>
+            		</div>
+            	</div>
+            </div>
+            <?php
+            	if(isset($offers) && !empty($offers)){
+			?>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="py-15 background-white">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="lead margin-bottom-20px margin-top-20px">Discount Offers</div>
+                            <ul>
+                                <?php
+                                    foreach($offers as $offer){
+                                ?>
+                                <li><?php echo $offer['offer']; ?></li>
+                                <?php
+                                    }
+                                ?>
+                            </ul>
+                      	</div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <script>
+          	</div>
+            <?php
+				}
+			?>
+        </div>
+    </div>
 
-            function validatepassword(){
-                var password=$('#password').val();
-                var reenter=$('#reenter').val();
-                if(password!=reenter){
-                   alert("Password Do not Match!");
-                    return false;
-                }
-            }
-        </script>
-        

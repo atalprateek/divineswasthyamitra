@@ -29,6 +29,7 @@
                                 }
                                 else{
                             ?>
+                            <a href="<?= base_url('profile/'); ?>"><li class="btn btn-round clr1">Profile</li></a>  
                             <a href="<?= base_url('logout/'); ?>"><li class="btn btn-round clr1">Logout</li></a>   
                             <?php
                                 }
