@@ -59,6 +59,7 @@ $route['gallery']='home/gallery';
 
 $route['listings/page']='listings';
 $route['listings/page/(:num)']='listings';
+$route['listings/(:any)']='listings/details';
 
 $route['login']='account/index';
 $route['signup']='account/signup';

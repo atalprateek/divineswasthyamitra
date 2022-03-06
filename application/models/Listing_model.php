@@ -94,7 +94,7 @@ class Listing_model extends CI_Model{
 	
 	public function gethospitaldetails($where){
 		$basepath=file_url();
-		$default=file_url('assets/img/clinic-featured.jpg');
+		$default=file_url('assets/images/banner_3.jpg');
 		$default_thumb=file_url('assets/img/clinic-list-1.jpg');
 		$default_featured=file_url('assets/img/featured-img.jpg');		
 		$array=$this->db->get_where("hospital",$where)->row_array();

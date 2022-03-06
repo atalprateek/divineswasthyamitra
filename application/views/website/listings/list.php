@@ -63,7 +63,7 @@
 										$url=base_url("listings/".$hospital['slug']);
                             ?>
                             <!-- clinic -->
-                            <div class="background-white thum-hover box-shadow hvr-float full-width mb-15 listing-div">
+                            <div class="background-white thum-hover hvr-float full-width mb-15 listing-div">
                                 <div class="col-md-3 sm-mr-0px text-center sm-mt-35px">
                                     <img src="<?php echo $hospital['thumb_image'] ?>" alt="">
                                 </div>
