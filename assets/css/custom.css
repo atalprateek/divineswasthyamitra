@@ -126,3 +126,33 @@ table.profile td{
     padding: 10px 5px;
 }
 
+.listing-sidebar{
+    
+}
+.listing-sidebar ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.listing-sidebar ul li{
+    padding: 0.5rem 1rem ;
+    border: 1px solid #ccc;
+}
+.listing-sidebar ul li.active{
+    background-color: #047b9a;
+    color: #FFFFFF;
+}
+.listing-sidebar ul li.active a{
+    color: #FFFFFF;
+}
+.listing-div{
+    border: 1px solid #ccc;
+    padding: 1rem 0.5rem;
+    box-shadow: 3px 3px 3px #c7c7c7;
+}
+.listing-div:hover{
+    box-shadow: 0px 0px 0px #c7c7c7;
+}
+.listing-div h2{
+    font-size: 25px;
+}

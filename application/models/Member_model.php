@@ -100,4 +100,48 @@ class Member_model extends CI_Model{
 		$result=$query->result_array();
 		return $result;
 	}
+    
+	public function updatemember($data,$where){
+		if($this->db->update("members",$data,$where)){
+            return array("status"=>true,"message"=>"Profile Updated Successfully!");
+		}
+        else{
+            $error=$this->db->error();
+            return array("status"=>false,"message"=>$error['message']);
+        }
+	}
+	
+	public function addfamily($data){
+		$user=$data['user'];
+		$member=$this->account->getuser(array("md5(id)"=>$user));
+		$user_id=$member['user']['id'];
+		$ids=$data['id'];
+		$names=$data['name'];
+		$relations=$data['relation'];
+		$ages=$data['age'];
+		$genders=$data['gender'];
+		$data=array();
+		$updata=array();
+		$where=array();
+		foreach($names as $key=>$name){
+			if($name=='' && $ids[$key]==''){ continue; }
+			if($ids[$key]==''){
+				$data[]=array("name"=>$name,"relation"=>$relations[$key],"age"=>$ages[$key],"gender"=>$genders[$key],"user_id"=>$user_id);
+			}
+			else{
+				$updata[]=array("name"=>$name,"relation"=>$relations[$key],"age"=>$ages[$key],"gender"=>$genders[$key],"user_id"=>$user_id);
+				$where[]=array('id'=>$ids[$key]);
+			}
+		}
+		if(!empty($data)){
+			$this->db->insert_batch("member_family",$data);
+		}
+		if(!empty($updata)){
+			foreach($updata as $key=>$value){
+				$this->db->update("member_family",$value,$where[$key]);
+			}
+		}
+		return true;
+	}
+	
 }

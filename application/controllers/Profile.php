@@ -38,6 +38,7 @@ class Profile extends CI_Controller {
         $data['user']=$this->user;
         $data['member']=$this->member->getmembers(array("t1.id"=>$data['user']['id']),"single");
 		$data['familymembers']=$this->member->getfamilymembers(array("user_id"=>$data['user']['id']));
+        $user_id=$data['user']['id'];
 		$states=$this->website->getstate();
 		$options=array(""=>"Select State");
 		if(is_array($states)){
@@ -46,27 +47,31 @@ class Profile extends CI_Controller {
 			}
 		}
 		$data['states']=$options;
-		//$states=$this->Location_model->getstate();
-		/*$user_id=$data['member']['user_id'];
-		$options=array(""=>"Select State");
-		if(is_array($states)){
-			foreach($states as $state){
-				$options[$state['state']]=$state['state'];
-			}
-		}
-		$data['states']=$options;
-		$memberwhere="hce_id in (select refid from ht_members where user_id='$user_id')";
-		$wards=$this->Member_model->getwards($memberwhere);
+        
+        $memberwhere="hca_id in (select refid from ".TP."members where user_id='$user_id')";
+        $wards=$this->member->getwards($memberwhere);
 		$options=array(""=>"Select Ward/Panchayat");
 		if(is_array($wards)){
 			foreach($wards as $ward){
 				$options[$ward['id']]=$ward['ward'];
 			}
 		}
-		$data['wards']=$options;*/
+		$data['wards']=$options;
 		$this->load->view('website/includes/top-section',$data);
 		$this->load->view('website/includes/header');
 		$this->load->view('website/profile/editprofile');
+		$this->load->view('website/includes/footer');
+		$this->load->view('website/includes/bottom-section');
+	}
+	
+	public function makepayment(){
+		if($this->session->userdata("paid")==1){ redirect('profile/'); }
+		$data['title']="Make Payment";
+        $data['user']=$this->user;
+        $data['member']=$this->member->getmembers(array("t1.id"=>$data['user']['id']),"single");
+		$this->load->view('website/includes/top-section',$data);
+		$this->load->view('website/includes/header');
+		$this->load->view('website/profile/makepayment');
 		$this->load->view('website/includes/footer');
 		$this->load->view('website/includes/bottom-section');
 	}
@@ -118,9 +123,8 @@ class Profile extends CI_Controller {
         if($this->input->post('updateprofile')!==NULL){
             $data=$this->input->post();
             unset($data['updateprofile']);
-            $mobile=$data['mobile'];
-            $where=array("md5(id)"=>$this->session->user);
-            $result=$this->account->updateuser($data,$where);
+            $where=array("md5(user_id)"=>$this->session->user);
+            $result=$this->member->updatemember($data,$where);
             if($result['status']===true){
                 $this->session->set_flashdata('msg',$result['message']);
                 redirect('profile/');
@@ -159,4 +163,13 @@ class Profile extends CI_Controller {
         redirect('profile/');
     }
     
+	public function addfamily(){
+        if($this->input->post('addfamily')!==NULL){
+            $data=$this->input->post();
+            $data['user']=$this->session->userdata('user');
+            $result=$this->member->addfamily($data);
+        }
+		redirect('profile/');
+	}
+	
 }

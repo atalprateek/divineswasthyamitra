@@ -140,7 +140,7 @@ class Account extends CI_Controller {
                     $this->session->unset_userdata('redirect'); 
                 }
                 $result=array("status"=>true,"message"=>"Verified","redirecturl"=>$redirecturl);
-                redirect('/');
+                redirect('profile/');
             }
             else{
                 $this->session->set_flashdata("log_err",$result['message']);
@@ -165,7 +165,7 @@ class Account extends CI_Controller {
                     $this->session->unset_userdata('redirect'); 
                 }
                 $result=array("status"=>true,"message"=>"Logged In","redirecturl"=>$redirecturl);
-                redirect('/');
+                redirect('profile/');
             }
             elseif($result['status']===false && $result['message']=='Account not Verified!'){
                 $this->session->set_userdata('mobile',$data['username']);
@@ -190,6 +190,7 @@ class Account extends CI_Controller {
 		$data['user']=md5($result['id']);
 		$data['name']=$result['name'];
 		$data['role']=$result['role'];
+		$data['paid']=$result['paid'];
 		$data['project']=PROJECT_NAME;
 		$this->session->set_userdata($data);
 	}

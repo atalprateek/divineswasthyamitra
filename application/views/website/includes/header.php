@@ -47,62 +47,8 @@
                                 <ul id="header-categoris" class="menu">
                                     <li class="menu-item"><a href="<?= base_url(); ?>">Home</a></li>
                                     <li class="menu-item"><a href="<?= base_url('aboutus/'); ?>">About Us</a></li>
-                                    <li class="menu-item menu-item-has-children has-sub"><a href="#" data-toggle="modal" data-target="#servicemodal">Services</a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children has-sub col2"><a href="#">Elder Care</a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children has-sub col2"><a href="#">Why Home Care?</a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children has-sub"><a href="#">Family Speaks</a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children has-sub"><a href="#">Careers</a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                            <li class="menu-item"><a href="#">Sub Category</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class="menu-item"><a href="<?= base_url('listings/'); ?>">Listings</a></li>
+                                    <li class="menu-item"><a href="<?= base_url('gallery/'); ?>">Gallery</a></li>
                                 </ul>
                             </div>
                         </div>

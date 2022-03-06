@@ -112,7 +112,9 @@
                                     <div class="col-md-4">
                                         <label class="control-label">Ward/Panchayat</label>
                                         <?php
-                                            echo form_dropdown('ward',$wards,$member['ward'],array("class"=>"form-control","id"=>"ward"));
+                                            $attr=array("class"=>"form-control","id"=>"ward");
+                                            if($member['ward']!=''){$attr['disabled']="true";}
+                                            echo form_dropdown('ward',$wards,$member['ward'],$attr);
                                         ?>
                                     </div>
                                     <?php
@@ -130,7 +132,7 @@
                             </div>
                             <div class="form-group my-15">
 
-                                <button type="submit" class="btn btn-sm btn-success">Update Profile</button>
+                                <button type="submit" name="updateprofile" class="btn btn-sm btn-success">Update Profile</button>
                             </div>
                         </div>
                     <?php echo form_close(); ?>
@@ -214,7 +216,11 @@
                                             $relations=array(""=>"Select Relation","Father"=>"Father","Mother"=>"Mother","Brother"=>"Brother",
 																"Sister"=>"Sister","Husband"=>"Husband","Wife"=>"Wife","Son"=>"Son",
 																"Daughter"=>"Daughter");
-                                            echo form_dropdown('relation[]',$relations,$relation,array("class"=>"form-control"));
+                                    
+                                            $attr=array("class"=>"form-control");
+                                            if($relation!=''){$attr['disabled']="true";}
+                                    
+                                            echo form_dropdown('relation[]',$relations,$relation,$attr);
 											
                                         ?>
                                     </div>
@@ -230,7 +236,9 @@
                                         <label class="control-label">Gender</label>
                                         <?php
                                             $gender=array(""=>"Gender","Male"=>"Male","Female"=>"Female");
-                                            echo form_dropdown('gender[]',$gender,$genderval,array("class"=>"form-control"));
+                                            $attr=array("class"=>"form-control");
+                                            if($genderval!=''){$attr['disabled']="true";}
+                                            echo form_dropdown('gender[]',$gender,$genderval,$attr);
                                         ?>
                                     </div>
                                     <input type="hidden" name="id[]" value="<?php echo $id; ?>">
@@ -240,7 +248,7 @@
 								}
 							?>
                             <div class="form-group my-15">
-                                <button type="submit" class="btn btn-sm btn-success">Add Family Member</button>
+                                <button type="submit" class="btn btn-sm btn-success" name="addfamily">Add Family Member</button>
                             </div>
                         </div>
                     <?php echo form_close(); ?>

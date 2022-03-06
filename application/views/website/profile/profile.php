@@ -1,14 +1,14 @@
 
 
-    <div class="margin-tb-30px">
+    <div class="my-10">
         <div class="container">
-            <div class="row">
-            	<div class="col-md-12">
+            <div class="row mb-10">
+            	<div class="col-md-12 mb-10">
                     <div class="py-15 background-white">
                         <div class="row">
                             <div class="col-md-6 py-10 my-5">
                                 <div class="lead my-15">My Profile</div>
-                                <table class="profile">
+                                <table class="profile mb-10">
                                 	<tr>
                                         <td>Name</td>
                                         <td><?php echo $member['name']; ?></td>
@@ -74,7 +74,7 @@
                                         <td>Ward/Panchayat</td>
                                         <td>
 											<?php 
-												echo $ward;
+												echo $ward['ward'];
 											?>
                                         </td>
                                     </tr>

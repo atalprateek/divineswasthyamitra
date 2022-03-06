@@ -55,7 +55,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['aboutus']='home/aboutus';
 $route['contactus']='home/contactus';
-$route['privacypolicy']='home/privacypolicy';
+$route['gallery']='home/gallery';
+
+$route['listings/page']='listings';
+$route['listings/page/(:num)']='listings';
 
 $route['login']='account/index';
 $route['signup']='account/signup';
