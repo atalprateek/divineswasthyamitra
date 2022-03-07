@@ -84,7 +84,7 @@ class Member_model extends CI_Model{
                     t2.amobile,t2.pincode";
 		$this->db->select($columns);
 		$this->db->from('users t1');
-		$this->db->join('members t2','t2.user_id=t1.id','Left');
+		$this->db->join('members t2','t2.user_id=t1.id');
 		$this->db->where($where);
 		$query=$this->db->get();
 		if($type=='all'){
@@ -142,6 +142,61 @@ class Member_model extends CI_Model{
 			}
 		}
 		return true;
+	}
+	
+	public function updatepaidstatus($id){
+		$result=array();
+		if($this->db->update("users",array("paid"=>'1'),array("id"=>$id))){
+			$result['status']	=true;
+			$result['member']=$this->db->get_where("users",array("id"=>$id))->unbuffered_row('array');
+		}
+		else{ $result=$this->db->error();$result['status']=false; }
+		return $result;
+	}
+	
+	public function deletemember($id){
+		if($this->db->delete("users",array("id"=>$id))){
+            $this->db->delete("members",array("user_id"=>$id));
+            $this->db->delete("member_family",array("user_id"=>$id));
+            return array("status"=>true,"message"=>"Member Deleted Successfully!");
+        }
+        else{
+            $error=$this->db->error();
+            return array("status"=>false,"message"=>$error['message']);
+        }
+	}
+	
+	public function addcardno($data,$id){
+		$where['user_id']=$id;
+		$array=$this->db->get_where("members",$where)->unbuffered_row('array');
+		$filename=generate_slug($array['name'].'-'.$data['card_no']).'.jpg';
+		$data['cardfile']="assets/images/cards/".$filename;
+		if($this->db->update("members",$data,$where)){
+			$salt=$this->db->get_where("users",array("id"=>$id))->row()->salt;
+			$data=array("id"=>$id,"card_no"=>$data['card_no'],"name"=>$array['name'],"issue"=>$data['issue_date'],"aadhar"=>$array['aadhar'],"salt"=>$salt);
+            $hce=$this->db->get_where("members",array("user_id"=>$array['refid']))->unbuffered_row()->name;
+			$getfamily=$this->db->get_where("member_family",array("user_id"=>$id));
+			$family=array();
+			if($getfamily->num_rows()>0){
+				$members=$getfamily->result_array();
+				foreach($members as $member){
+					$family[]=$member['name'];
+				}
+			}
+			//$address=explode(',',$array['address']);
+			$address=$array['address'];
+			$data['hce']=$hce;
+			$data['members']=$family;
+			$data['address']=$address;
+			$data['address2']=$array['district'].','.$array['state'];
+			$data['mobile']=$array['mobile'];
+			//createverticalcard($data);
+            return array("status"=>true,"message"=>"Member Card Added Successfully!");
+        }
+        else{
+            $error=$this->db->error();
+            return array("status"=>false,"message"=>$error['message']);
+		}
 	}
 	
 }

@@ -49,6 +49,11 @@
                                                         <span class="pcoded-mtext">Add HCA</span>
                                                     </a>
                                                 </li>
+                                                <li class="<?= activate_menu('members/memberlist'); ?>">
+                                                    <a href="<?=  admin_url('members/memberlist/'); ?>" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext">Member List</span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li class="pcoded-hasmenu active pcoded-trigger d-none">

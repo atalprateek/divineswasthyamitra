@@ -96,7 +96,7 @@ class Listings extends CI_Controller {
 		if($this->session->user!==NULL && $this->session->paid==1){
 			$data['display_status']=true;
 		}else{
-			$data['display_status']=true;
+			$data['display_status']=false;
 		}
         
 		$this->load->view('website/includes/top-section',$data);
