@@ -6,7 +6,7 @@ class Profile extends CI_Controller {
     
 	function __construct(){
 		parent::__construct();
-        $where="md5(id)='".$this->session->user."' and (role='member' or role='hca')";
+        $where="md5(id)='".$this->session->user."' and (role='member' or role='hca' or role='nurse')";
         $result=$this->account->getuser($where);
         if($result['status']===true){
             $this->user=$result['user'];
@@ -19,7 +19,12 @@ class Profile extends CI_Controller {
 	public function index(){
         $data['title']="Profile";
         $data['user']=$this->user;
-        $data['member']=$this->member->getmembers(array("t1.id"=>$data['user']['id']),"single");
+        if($this->session->role=='nurse'){
+            $data['member']=$this->nurse->getnurses(array("t1.id"=>$data['user']['id']),"single");
+        }
+        else{
+            $data['member']=$this->member->getmembers(array("t1.id"=>$data['user']['id']),"single");
+        }
         if($this->session->role=='hca'){
 			$data['wards']=$this->member->getwards(array("hca_id"=>$data['user']['id']));
         }
@@ -119,6 +124,43 @@ class Profile extends CI_Controller {
 		exporttoexcel($result,$fieldinfo);
 	}
 	
+	public function patientlist(){
+		if($this->session->role=='nurse'){
+			$data['title']="Patient List";
+            $user=$this->user;
+			$user_id=$user['id'];
+			$where=array("t2.nurse_id"=>$user_id,"t1.role"=>'member');
+			$data['patients']=$this->nurse->getpatients($where);
+			$data['styles']=array("link"=>"https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css");
+			$data['top_script']=array("link"=>"https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js");
+            $this->load->view('website/includes/top-section',$data);
+            $this->load->view('website/includes/header');
+            $this->load->view('website/profile/patientlist');
+            $this->load->view('website/includes/footer');
+            $this->load->view('website/includes/bottom-section');
+		}
+		else{ redirect('profile/'); }
+	}
+	
+	public function monthlycheckup(){
+		if($this->session->role=='nurse' && $this->uri->segment(2)!==NULL){
+            $user_id=$this->uri->segment(2);
+            $data['title']="Monthly Checkup";
+            $getuser=$this->account->getuser(array("id"=>$user_id,"role"=>"member"));
+            if($getuser['status']===false){ redirect('patientlist/'); exit; }
+            $data['user']=$getuser['user'];
+            $data['member']=$this->member->getmembers(array("t1.id"=>$user_id),"single");
+            if(md5($data['member']['nurse_id'])!=$this->session->user){ redirect('patientlist/'); exit; }
+            
+            $this->load->view('website/includes/top-section',$data);
+            $this->load->view('website/includes/header');
+            $this->load->view('website/profile/monthlycheckup');
+            $this->load->view('website/includes/footer');
+            $this->load->view('website/includes/bottom-section');
+		}
+		else{ redirect('patientlist/'); }
+	}
+	
     public function updateprofile(){
         if($this->input->post('updateprofile')!==NULL){
             $data=$this->input->post();
@@ -172,4 +214,26 @@ class Profile extends CI_Controller {
 		redirect('profile/');
 	}
 	
+    public function savecheckup(){
+        if($this->input->post('savecheckup')!==NULL){
+            $data=$this->input->post();
+            $name=$data['name'];
+            $mobile=$data['mobile'];
+            $email=$data['email'];
+            unset($data['savecheckup'],$data['name'],$data['mobile'],$data['email']);
+            $user=$this->user;
+            $data['nurse_id']=$user['id'];
+            $result=$this->nurse->savecheckup($data,$where);
+            if($result['status']===true){
+                $this->session->set_flashdata('msg',$result['message']);
+                redirect('patientlist/');
+            }
+            else{
+                $error=$result['message'];
+                $this->session->set_flashdata('err_msg',$error);
+            }
+        }
+        redirect('patientlist/');
+    }
+    
 }

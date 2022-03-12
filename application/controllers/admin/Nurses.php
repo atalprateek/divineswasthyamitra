@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Members extends CI_Controller {
+class Nurses extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -9,16 +9,16 @@ class Members extends CI_Controller {
 	}
 	
 	public function index(){
-        $data['title']="HCA List";
+        $data['title']="Nurse List";
 		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
 		$data['datatable']=true;
 		
-		$data['members']=$this->member->gethcas();
-		$this->template->load('members','hcalist',$data);
+		$data['nurses']=$this->nurse->getnurses();
+		$this->template->load('nurses','nurselist',$data);
 	}	
     
-	public function addhca(){
-        $data['title']="Add HCA";
+	public function addnurse(){
+        $data['title']="Add Nurse";
 		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
 		$states=$this->website->getstate();
 		$options=array(""=>"Select State");
@@ -29,7 +29,7 @@ class Members extends CI_Controller {
 		}
 		$data['states']=$options;
         
-		$this->template->load('members','addhca',$data);
+		$this->template->load('nurses','addnurse',$data);
 	}
     
 	public function edit($id=NULL){
@@ -63,33 +63,32 @@ class Members extends CI_Controller {
 		$this->template->load('listings','edit',$data);
 	}
     
-	public function memberlist(){
-        $data['title']="Member List";
+	public function nurselist(){
+        $data['title']="nurse List";
 		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
 		$data['datatable']=true;
 		
-		$data['members']=$this->member->getmembers();
-		$this->template->load('members','memberlist',$data);
+		$data['nurses']=$this->nurse->getnurses();
+		$this->template->load('nurses','nurselist',$data);
 	}	
     
-	public function savehca(){
-        if($this->input->post('savehca')!==NULL){
+	public function savenurse(){
+        if($this->input->post('savenurse')!==NULL){
             $data=$this->input->post();
-            $wards=$data['ward'];
             $userdata=array(
                         "username"=>$data['mobile'],
                         "name"=>$data['name'],
                         "mobile"=>$data['mobile'],
                         "email"=>$data['email'],
-                        "role"=>'hca',
+                        "role"=>'nurse',
                         "created_on"=>date('Y-m-d H:i:s'),
                         "updated_on"=>date('Y-m-d H:i:s'),
                         "status"=>1
                         );
             $result=$this->account->register($userdata);
             if($result['status']===true){
-                $message="You have been successfully registered as Health Care Advisor with ".PROJECT_NAME.". Your Login Id is ".$data['mobile']." and Password is ".$result['password'].".";
-                $memberdata=array(
+                $message="You have been successfully registered as Nurse with ".PROJECT_NAME.". Your Login Id is ".$data['mobile']." and Password is ".$result['password'].".";
+                $nursedata=array(
                             "name"=>$data['name'],
                             "mobile"=>$data['mobile'],
                             "amobile"=>$data['amobile'],
@@ -103,97 +102,27 @@ class Members extends CI_Controller {
                             "age"=>$data['age'],
                             "user_id"=>$result['user_id']
                             );
-                $result2=$this->member->addmember($memberdata);
-                $warddata=array();
-                foreach($wards as $ward){
-                    $warddata[]=array("ward"=>$ward,"hca_id"=>$result['user_id']);
-                }
-                $result3=$this->member->insertward($warddata);
+                $result2=$this->nurse->addnurse($nursedata);
                 
                 //$smsdata=array($data['mobile']=>$message);
                 //send_sms($smsdata);
                 
-                $this->session->set_flashdata("msg","HCA Added Successfully");
+                $this->session->set_flashdata("msg","Nurse Added Successfully");
             }
             else{
                 $this->session->set_flashdata("err_msg",$result['message']);
             }
         }
-		redirect(admin_url('members/'));
+		redirect(admin_url('nurses/'));
 	}
 	
-    public function changememberstatus(){
+    public function changenursestatus(){
         $id=$this->input->post('id');
         $status=$this->input->post('status');
         $result=$this->account->changeuserstatus($id,$status);
         
     }
-	public function updatehospital(){
-        $id="";
-        if($this->input->post('updatehospital')!==NULL){
-            $data=$this->input->post();
-            $id=$data['id'];
-            $data['slug']=generate_slug($data['name']);
-            unset($data['updatehospital']);
-            $discountarray=array();
-            if(isset($data['discount_id'])){
-                $discount_ids=$data['discount_id'];
-                $discounts=$data['discount'];
-                unset($data['discount_id']);
-                unset($data['discount']);
-                foreach($discount_ids as $key=>$discount_id){
-                    $discountarray[]=array("hospital_id"=>$data['id'],"discount_id"=>$discount_id,
-                                           "discount"=>$discounts[$key]);
-                }
-            }
-            $working_hours=array();
-
-            $schedule=$data['schedule'];
-            unset($data['schedule']);
-            $days=$data['day'];
-            $open_times=$data['open_time'];
-            $close_times=$data['close_time'];
-            unset($data['day']); unset($data['open_time']); unset($data['close_time']);
-            foreach($days as $key=>$day){
-                if($schedule=='daily'){
-                    $working_hours['data'][]=array("hospital_id"=>$data['id'],"day"=>$day,"open_time"=>$open_times[$key],
-                                                   "close_time"=>$close_times[$key],"24hours"=>0);
-                }
-                else{
-                    $working_hours['data'][]=array("hospital_id"=>$data['id'],"day"=>$day,"24hours"=>1,"open_time"=>'',"close_time"=>'');
-                }
-                $working_hours['where'][]=array("hospital_id"=>$data['id'],"day"=>$day);
-            }
-            
-            $file_name=$data['name'];
-            $imgdata=array();
-            $upload_path='./assets/images/hospital/';
-            $allowed_types='gif|jpg|jpeg|png|svg';
-            $image=upload_file('image',$upload_path,$allowed_types,$file_name);
-            if($image['status']===true){
-                create_image_thumb('.'.$image['path'],'',true,array("width"=>450,"height"=>250));
-                $imgdata['image']=$image['path'];
-                preg_match('/(\.[a-z]+)$/', $image['path'], $match);
-                $imgdata['featured_image']=preg_replace("/(\.[a-z]+)$/", "_thumb".$match[0], $image['path']);;
-            }
-
-            $thumb_image=upload_file('thumb_image',$upload_path,$allowed_types,$file_name."-thumb");
-            if($thumb_image['status']===true){
-                create_image_thumb('.'.$thumb_image['path'],'',false,array("width"=>200,"height"=>200));
-                $imgdata['thumb_image']=$thumb_image['path'];
-            }
-            
-            $result=$this->listing->updatehospital($data,$discountarray,$working_hours,$imgdata);
-            if($result['status']===true){
-                $this->session->set_flashdata("msg",$result['message']);
-            }
-            else{
-                $this->session->set_flashdata("err_msg",$result['message']);
-            }
-        }
-		redirect(admin_url('listings/edit/'.md5($id)));
-	}
-	
+    
 	public function delete($id=NULL){
 		if($id===NULL){ admin_url('listings/'); }
         $where=array("md5(id)"=>$id);
@@ -246,25 +175,25 @@ class Members extends CI_Controller {
         echo $slug;
     }
     
-	public function activatemember(){
+	public function activatenurse(){
 		$user_id=$this->input->post('user_id');
-		$result=$this->member->updatepaidstatus($user_id);
+		$result=$this->nurse->updatepaidstatus($user_id);
 		if($result['status']===true){
-			$message="Thank You for registering as Paid Member of ".PROJECT_NAME.". ";
-			$mobile=$result['member']['mobile'];
+			$message="Thank You for registering as Paid nurse of ".PROJECT_NAME.". ";
+			$mobile=$result['nurse']['mobile'];
 			$smsdata=array($mobile=>$message);
 			//send_sms($smsdata);
 		}
 		else{
 			
 		}
-		redirect(admin_url('members/memberlist/'));
+		redirect(admin_url('nurses/nurselist/'));
 	}
 	
-	public function deletemember(){
-        if($this->input->post('deletemember')!==NULL){
+	public function deletenurse(){
+        if($this->input->post('deletenurse')!==NULL){
             $id=$this->input->post('id');
-            $result=$this->member->deletemember($id);
+            $result=$this->nurse->deletenurse($id);
             if($result['status']===true){
                 $this->session->set_flashdata("msg",$result['message']);
             }
@@ -274,10 +203,10 @@ class Members extends CI_Controller {
         }
 	}
 	
-	public function getmember(){
+	public function getnurse(){
 		$id=$this->input->post('id');
-		$member=$this->member->getmembers(array("t1.id"=>$id),'Single');
-		echo json_encode($member);
+		$nurse=$this->nurse->getnurses(array("t1.id"=>$id),'Single');
+		echo json_encode($nurse);
 	}
 	
 	public function addcardno(){
@@ -285,7 +214,7 @@ class Members extends CI_Controller {
             $user_id=$this->input->post('user_id');
             $data['card_no']=$this->input->post('card_no');
             $data['issue_date']=$this->input->post('issue_date');
-            $result=$this->member->addcardno($data,$user_id);
+            $result=$this->nurse->addcardno($data,$user_id);
             if($result['status']===true){
                 $this->session->set_flashdata("msg",$result['message']);
             }

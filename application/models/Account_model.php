@@ -60,6 +60,10 @@ class Account_model extends CI_Model{
                 $flag=false;
                 $msg="Invalid Login Details!";
             }
+            elseif($user['status']==3){
+                $flag=false;
+                $msg="Invalid Login Details!";
+            }
             else{
                 $salt=$user['salt'];
                 $password=$user['password'];

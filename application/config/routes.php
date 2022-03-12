@@ -70,5 +70,9 @@ $route['verifyotp']='account/verifyotp';
 $route['validatelogin']='account/validatelogin';
 $route['logout']='account/logout';
 
+$route['patientlist']='profile/patientlist';
+$route['monthlycheckup']='profile/monthlycheckup';
+$route['monthlycheckup/(:num)']='profile/monthlycheckup';
+
 $route['admin/logout']='admin/login/logout';
 

@@ -1,5 +1,21 @@
 <?php 
 	if(!defined('BASEPATH')) exit('No direct script access allowed');
+	if(!function_exists('checkmonthlycheckup')) {
+  		function checkmonthlycheckup($user_id) {
+    		$CI = get_instance();
+            $year=date('Y');
+            $month=date('m');
+            $where="year(date)='$year' and month(date)='$month' and user_id='$user_id'";
+            $count=$CI->db->get_where("monthly_checkup",$where)->num_rows();
+            if($count==0){
+                return false;
+            }
+            else{
+                return true;
+            }
+		}  
+	}
+
 	if(!function_exists('getbannerimages')) {
   		function getbannerimages() {
     		$CI = get_instance();

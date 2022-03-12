@@ -21,7 +21,7 @@
                             <a href="#"><li><i class="fa fa-linkedin" aria-hidden="true"></i></li></a>
                             <a href="#"><li><i class="fa fa-youtube-play" aria-hidden="true"></i></li></a>
                             <?php
-                                if($this->session->user===NULL || ($this->session->role!='member' && $this->session->role!='hca')){
+                                if($this->session->user===NULL || ($this->session->role!='member' && $this->session->role!='hca' && $this->session->role!='nurse')){
                             ?>
                             <a href="<?= base_url('signup/'); ?>"><li class="btn btn-round clr1">Sign Up</li></a>   
                             <a href="<?= base_url('login/'); ?>"><li class="btn btn-round clr1">Login</li></a>   
@@ -47,7 +47,6 @@
                                 <ul id="header-categoris" class="menu">
                                     <li class="menu-item"><a href="<?= base_url(); ?>">Home</a></li>
                                     <li class="menu-item"><a href="<?= base_url('aboutus/'); ?>">About Us</a></li>
-                                    <li class="menu-item"><a href="<?= base_url('listings/'); ?>">Listings</a></li>
                                     <li class="menu-item"><a href="<?= base_url('gallery/'); ?>">Gallery</a></li>
                                 </ul>
                             </div>

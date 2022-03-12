@@ -15,24 +15,6 @@
                                                 <span class="pcoded-mtext">Home</span>
                                             </a>
                                         </li>
-                                        <li class="pcoded-hasmenu <?= activate_dropdown('listings'); ?>">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="fas fa-list"></i></span>
-                                                <span class="pcoded-mtext">Listings</span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="<?= activate_menu('listings'); ?>">
-                                                    <a href="<?=  admin_url('listings/'); ?>" class="waves-effect waves-dark">
-                                                        <span class="pcoded-mtext">View Listings</span>
-                                                    </a>
-                                                </li>
-                                                <li class="<?= activate_menu('listings/add'); ?>">
-                                                    <a href="<?=  admin_url('listings/add/'); ?>" class="waves-effect waves-dark">
-                                                        <span class="pcoded-mtext">Add Listing</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
                                         <li class="pcoded-hasmenu <?= activate_dropdown('members'); ?>">
                                             <a href="javascript:void(0)" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="fas fa-users"></i></span>
@@ -52,6 +34,24 @@
                                                 <li class="<?= activate_menu('members/memberlist'); ?>">
                                                     <a href="<?=  admin_url('members/memberlist/'); ?>" class="waves-effect waves-dark">
                                                         <span class="pcoded-mtext">Member List</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="pcoded-hasmenu <?= activate_dropdown('nurses'); ?>">
+                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="fas fa-users"></i></span>
+                                                <span class="pcoded-mtext">Nurses</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="<?= activate_menu('nurses'); ?>">
+                                                    <a href="<?=  admin_url('nurses/'); ?>" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext">Nurse List</span>
+                                                    </a>
+                                                </li>
+                                                <li class="<?= activate_menu('nurses/addnurse'); ?>">
+                                                    <a href="<?=  admin_url('nurses/addnurse/'); ?>" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext">Add Nurse</span>
                                                     </a>
                                                 </li>
                                             </ul>

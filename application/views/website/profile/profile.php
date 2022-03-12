@@ -97,6 +97,9 @@
                                         }
                                     ?>
                                 </table>
+                                <?php
+                                if($this->session->role!='nurse'){
+                                ?>
                                 <a href="<?php echo base_url('profile/editprofile/'); ?>" class="btn btn-sm btn-info">
                                     <?php
                                         if($member['name']==''){echo "Complete Profile";}
@@ -104,6 +107,7 @@
                                     ?>
                                 </a>
                                 <?php
+                                }
                                     if($member['name']!='' && $this->session->role=='member' && $this->session->paid==0){
                                 ?>
                                 <a href="<?php echo base_url('profile/makepayment/');?>" class="btn btn-sm btn-primary">Make Payment</a>
@@ -122,28 +126,12 @@
                                 ?>
                             </div>
                             <?php
-								if($this->session->role!='member'){
+								if($this->session->role=='hca'){
 							?>
                             <div class="col-md-6 py-10 my-5">
                                 <div class="lead my-15">Members</div>
                                 <table class="profile">
 									<?php
-                                        if(isset($abms)){
-									?>
-                                	<tr>
-                                        <td width="60%">Total ABMS</td>
-                                        <td><?php echo $abms; ?></td>
-                                    </tr>
-                                    <?php
-                                        }
-                                        if(isset($hces)){
-									?>
-                                	<tr>
-                                        <td width="60%">Total HCES</td>
-                                        <td><?php echo $hces; ?></td>
-                                    </tr>
-                                    <?php
-                                        }
                                         if(isset($members)){
 									?>
                                 	<tr>
@@ -159,6 +147,30 @@
                                     ?>
                               	</table>
                                 <a href="<?php echo base_url('profile/memberlist/'); ?>" class="btn btn-sm btn-danger">View Members</a>
+                            </div>
+                            <?php
+								}
+                                elseif($this->session->role=='nurse'){
+							?>
+                            <div class="col-md-6 py-10 my-5">
+                                <div class="lead my-15">Patients</div>
+                                <table class="profile">
+									<?php
+                                        if(isset($patients)){
+									?>
+                                	<tr>
+                                        <td width="60%">Total Paid Members</td>
+                                        <td><?php echo $patients['paid_members']; ?></td>
+                                    </tr>
+                                	<tr>
+                                        <td>Total Free Members</td>
+                                        <td><?php echo $patients['free_members']; ?></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                              	</table>
+                                <a href="<?php echo base_url('patientlist/'); ?>" class="btn btn-sm btn-danger">View Patients</a>
                             </div>
                             <?php
 								}

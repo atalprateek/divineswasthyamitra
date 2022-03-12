@@ -178,7 +178,7 @@
     </div>
    	
 	<?php
-    	if($this->session->paid==1 && $this->session->role=='member'){
+    	if($this->session->paid==1 && $this->session->role=='member' && false){
 	?>
     <div class="margin-tb-30px">
         <div class="container">
