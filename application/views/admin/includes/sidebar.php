@@ -40,7 +40,7 @@
                                         </li>
                                         <li class="pcoded-hasmenu <?= activate_dropdown('nurses'); ?>">
                                             <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="fas fa-users"></i></span>
+                                                <span class="pcoded-micon"><i class="fa fa-user-nurse"></i></span>
                                                 <span class="pcoded-mtext">Nurses</span>
                                             </a>
                                             <ul class="pcoded-submenu">

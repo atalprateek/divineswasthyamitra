@@ -69,6 +69,14 @@ class Members extends CI_Controller {
 		$data['datatable']=true;
 		
 		$data['members']=$this->member->getmembers();
+		$nurses=$this->nurse->getnurses();
+		$options=array(""=>"Select Nurse");
+		if(is_array($nurses)){
+			foreach($nurses as $nurse){
+				$options[$nurse['id']]=$nurse['name'];
+			}
+		}
+		$data['nurses']=$options;
 		$this->template->load('members','memberlist',$data);
 	}	
     
@@ -285,8 +293,13 @@ class Members extends CI_Controller {
             $user_id=$this->input->post('user_id');
             $data['card_no']=$this->input->post('card_no');
             $data['issue_date']=$this->input->post('issue_date');
+            $data['nurse_id']=$this->input->post('nurse_id');
             $result=$this->member->addcardno($data,$user_id);
             if($result['status']===true){
+                $member=$this->member->getmembers(array("t1.id"=>$user_id),"single");
+                $nurse=$this->nurse->getnurses(array("t1.id"=>$data['nurse_id']),"single");
+                $message ="Dear $member[name], your Card has been generated Successfully. ";
+                $message.="$nurse[name] is assigned as your Swasthya Mitra Nurse.";
                 $this->session->set_flashdata("msg",$result['message']);
             }
             else{

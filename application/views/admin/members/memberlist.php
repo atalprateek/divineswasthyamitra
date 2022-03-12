@@ -108,6 +108,12 @@
                         ?>
                     </div>
                     <div class="form-group margin-bottom-20px">
+                        <label><i class="fa fa-user-nurse margin-right-10px"></i> Nurse</label>
+                        <?php
+                            echo form_dropdown('nurse_id', $nurses, '',array('id'=>'nurse_id','class'=>'form-control'));
+                        ?>
+                    </div>
+                    <div class="form-group margin-bottom-20px">
                         <label><i class="far fa-list-alt margin-right-10px"></i> Card No.</label>
                         <?php 
                             $data = array('name' => 'card_no', 'id'=> 'card_no', 'placeholder'=>'Card No.', 'class'=>'form-control form-control-sm', 'required'=>'true');
@@ -150,6 +156,7 @@
                     $('#mem_name').val(data['name']);
                     $('#card_no').val(data['card_no']);
                     $('#issue_date').val(data['issue_date']);
+                    $('#nurse_id').val(data['nurse_id']);
                     $('#user_id').val(data['id']);
                 }
             });
