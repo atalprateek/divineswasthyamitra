@@ -6,8 +6,8 @@ if(!defined('BASEPATH')) exit('No direct script access allowed');
 	else{	
 		define("API_KEY","df10ed7f6e294a8e88bab5101b508874");
 	}
-if(!function_exists('sendmessage')) {
-  		function sendmessage($mobile,$message) {
+if(!function_exists('send_message')) {
+  		function send_message($mobile,$message) {
             $message=urlencode($message);
             $url="http://142.132.202.49/wapp/api/send?";
             $body="apikey=".API_KEY;
