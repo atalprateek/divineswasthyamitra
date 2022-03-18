@@ -83,13 +83,13 @@ class Account extends CI_Controller {
                             "user_id"=>$result['user_id']
                             );
                 $result2=$this->member->addmember($memberdata);
-                redirect('enterotp/'.$otp);
+                //redirect('enterotp/'.$otp);
             }
             else{
                 $this->session->set_flashdata("reg_err",$result['message']);
             }
         }
-        redirect('signup/');
+        //redirect('signup/');
     }
     
     public function sendotp($where){
