@@ -13,7 +13,7 @@ if(!function_exists('send_message')) {
             $body="apikey=".API_KEY;
             $body.="&mobile=$mobile&msg=$message";
             $url.=$body;
-            echo $url=htmlToPlainText($url);
+            $url=htmlToPlainText($url);
             file_get_contents($url);
 		}  
 	}
