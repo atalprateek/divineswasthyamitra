@@ -107,7 +107,7 @@ class Account extends CI_Controller {
             }
             else{
                 //loginotp($mobile,$otp);
-                //$sms="$otp is your OTP to login to your ".PROJECT_NAME." account.";
+                $sms="$otp is your OTP to login to your ".PROJECT_NAME." account.";
             }
             send_message($mobile,$sms);
             return array("status"=>true,"message"=>$otp);
