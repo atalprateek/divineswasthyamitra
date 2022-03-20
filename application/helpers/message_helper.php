@@ -25,7 +25,7 @@ if(!function_exists('send_message')) {
             $str = html_entity_decode($str);
             $str = htmlspecialchars_decode($str);
             $str = strip_tags($str);
-return $str;
+            return $str;
         }
     }
     

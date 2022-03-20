@@ -150,13 +150,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Ward / Panchayat</label>
+                                                <label class="col-sm-2 col-form-label">Ward</label>
                                                 <div class="col-sm-10">
                                                     <table width="100%">
                                                         <tr>
                                                             <td width="93%">
                                                                 <?php 
-                                                                    $data = array('name' => 'ward[]', 'placeholder'=>'Ward / Panchayat', 'class'=>'form-control form-control-sm','required'=>'true');
+                                                                    $data = array('name' => 'ward[]', 'placeholder'=>'Ward', 'class'=>'form-control form-control-sm','required'=>'true');
                                                                     echo form_input($data); 
                                                                 ?>
                                                             </td>

@@ -116,7 +116,9 @@
                     <div class="form-group margin-bottom-20px">
                         <label><i class="far fa-list-alt margin-right-10px"></i> Card No.</label>
                         <?php 
-                            $data = array('name' => 'card_no', 'id'=> 'card_no', 'placeholder'=>'Card No.', 'class'=>'form-control form-control-sm', 'required'=>'true');
+                            $data = array('name' => 'card_no', 'id'=> 'card_no', 'placeholder'=>'Card No.', 
+                                          'class'=>'form-control form-control-sm', 'required'=>'true','maxlength'=>12,
+                                          'pattern'=>'[\d]{12}','title'=>'Enter 12 Digit Card Number');
                             echo form_input($data); 
                         ?>
                     </div>

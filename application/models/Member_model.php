@@ -174,24 +174,8 @@ class Member_model extends CI_Model{
 		$data['cardfile']="assets/images/cards/".$filename;
 		if($this->db->update("members",$data,$where)){
 			$salt=$this->db->get_where("users",array("id"=>$id))->row()->salt;
-			$data=array("id"=>$id,"card_no"=>$data['card_no'],"name"=>$array['name'],"issue"=>$data['issue_date'],"aadhar"=>$array['aadhar'],"salt"=>$salt);
-            $hce=$this->db->get_where("members",array("user_id"=>$array['refid']))->unbuffered_row()->name;
-			$getfamily=$this->db->get_where("member_family",array("user_id"=>$id));
-			$family=array();
-			if($getfamily->num_rows()>0){
-				$members=$getfamily->result_array();
-				foreach($members as $member){
-					$family[]=$member['name'];
-				}
-			}
-			//$address=explode(',',$array['address']);
-			$address=$array['address'];
-			$data['hce']=$hce;
-			$data['members']=$family;
-			$data['address']=$address;
-			$data['address2']=$array['district'].','.$array['state'];
-			$data['mobile']=$array['mobile'];
-			//createverticalcard($data);
+			$data=array("id"=>$id,"card_no"=>$data['card_no'],"name"=>$array['name'],"issue"=>$data['issue_date'],"salt"=>$salt);
+			createverticalcard($data);
             return array("status"=>true,"message"=>"Member Card Added Successfully!");
         }
         else{
