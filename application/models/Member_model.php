@@ -81,7 +81,7 @@ class Member_model extends CI_Model{
 			$where['t1.role']='member';
 		}
         $columns="t1.*,t2.aadhar,t2.gender,t2.age,t2.address,t2.state,t2.district,t2.card_no,t2.ward,t2.referral_code,
-                    t2.amobile,t2.pincode,t2.issue_date,t2.nurse_id";
+                    t2.amobile,t2.pincode,t2.issue_date,t2.nurse_id,t2.cardfile";
 		$this->db->select($columns);
 		$this->db->from('users t1');
 		$this->db->join('members t2','t2.user_id=t1.id');

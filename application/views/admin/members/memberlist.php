@@ -60,8 +60,15 @@
                                                             </form>
                                                             <?php
                                                                 }
+                                                                $text="Add Card No";
+                                                                if(!empty($member['card_no'])){
                                                             ?>
-                                                            <a href="#" data-toggle="modal" data-value="<?php echo $member['id']; ?>" data-target="#addcardno" class="mb-2 btn btn-sm btn-warning addcard">Add Card No</div></a>
+                                                            <a href="<?= file_url($member['cardfile']); ?>" class="mb-2 btn btn-sm btn-info" download>Download Card</div></a>
+                                                            <?php
+                                                                    $text="Update Card No";
+                                                                }
+                                                            ?>
+                                                            <a href="#" data-toggle="modal" data-value="<?php echo $member['id']; ?>" data-target="#addcardno" class="mb-2 btn btn-sm btn-warning addcard"><?= $text; ?></div></a>
                                                             <?php
                                                                 if($member['paid']==0){
                                                             ?>

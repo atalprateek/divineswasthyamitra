@@ -20,7 +20,7 @@
 			$issue = date('d/m/Y',strtotime($data['issue']));
 			$valid = date('m/y',strtotime($data['issue']."+1 year -1 day"));
 			
-			$filename=generate_slug($name.$card_no).'.jpg';
+			$filename=generate_slug($name.'-'.$card_no).'.jpg';
 			$carray=str_split($card_no);
 			$card_no='';
 			$i=0;
