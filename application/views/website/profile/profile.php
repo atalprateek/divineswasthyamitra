@@ -53,7 +53,7 @@
                                         <td><?php echo $member['referral_code']; ?></td>
                                     </tr>
                                 	<tr>
-                                        <td>Ward/Panchayat</td>
+                                        <td>Ward</td>
                                         <td>
 											<?php 
 												$w=array();
@@ -71,11 +71,9 @@
                                         if($this->session->role=='member'){
                                     ?>
                                 	<tr>
-                                        <td>Ward/Panchayat</td>
+                                        <td>Ward</td>
                                         <td>
-											<?php 
-												echo $ward['ward'];
-											?>
+											<?= isset($ward['ward'])?$ward['ward']:''; ?>
                                         </td>
                                     </tr>
                                 	<tr>

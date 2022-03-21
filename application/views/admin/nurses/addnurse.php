@@ -126,7 +126,7 @@
                                                 <label class="col-sm-2 col-form-label">Alternate Contact No</label>
                                                 <div class="col-sm-10">
                                                     <?php 
-                                                        $data = array('name' => 'amobile', 'id'=> 'amobile', 'placeholder'=>'Alternate Contact No', 'class'=>'form-control', 'required'=>'true');
+                                                        $data = array('name' => 'amobile', 'id'=> 'amobile', 'placeholder'=>'Alternate Contact No', 'class'=>'form-control');
                                                         echo form_input($data); 
                                                     ?>
                                                 </div>
@@ -143,6 +143,17 @@
                                                         echo form_input($data); 
                                                     ?>
                     			                    <div class="email-status"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Photo</label>
+                                                <div class="col-sm-10">
+                                                    <?php 
+                                                        $data = array('type'=>'file','name' => 'image', 'id'=> 'image');
+                                                        echo form_input($data); 
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>

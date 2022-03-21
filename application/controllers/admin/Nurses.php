@@ -88,6 +88,8 @@ class Nurses extends CI_Controller {
             $result=$this->account->register($userdata);
             if($result['status']===true){
                 $message="You have been successfully registered as Nurse with ".PROJECT_NAME.". Your Login Id is ".$data['mobile']." and Password is ".$result['password'].".";
+                
+                
                 $nursedata=array(
                             "name"=>$data['name'],
                             "mobile"=>$data['mobile'],
@@ -102,6 +104,14 @@ class Nurses extends CI_Controller {
                             "age"=>$data['age'],
                             "user_id"=>$result['user_id']
                             );
+                
+                $upload_path='./assets/images/nurse/';
+                $allowed_types='gif|jpg|jpeg|png|svg';
+                $image=upload_file('image',$upload_path,$allowed_types,$data['name']);
+                if($image['status']===true){
+                    $nursedata['image']=$image['path'];
+                }
+                
                 $result2=$this->nurse->addnurse($nursedata);
                 
                 send_message($data['mobile'],$message);
