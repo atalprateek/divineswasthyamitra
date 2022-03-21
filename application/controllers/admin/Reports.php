@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Members extends CI_Controller {
+class Reports extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -9,75 +9,26 @@ class Members extends CI_Controller {
 	}
 	
 	public function index(){
-        $data['title']="HCA List";
-		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
-		$data['datatable']=true;
-		
-		$data['members']=$this->member->gethcas();
-		$this->template->load('members','hcalist',$data);
-	}	
-    
-	public function addhca(){
-        $data['title']="Add HCA";
-		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
-		$states=$this->website->getstate();
-		$options=array(""=>"Select State");
-		if(is_array($states)){
-			foreach($states as $state){
-				$options[$state['state']]=$state['state'];
-			}
-		}
-		$data['states']=$options;
-        
-		$this->template->load('members','addhca',$data);
-	}
-    
-	public function edit($id=NULL){
-		if($id===NULL){ redirect(admin_url('listings/')); }
-		$data['hospital']=$this->listing->gethospital(array("md5(t1.id)"=>$id));
-		if($data['hospital']['rowcount']==0){ redirect(admin_url('listings/')); }
-		$data['hospital']=$this->listing->gethospitaldetails(array("md5(id)"=>$id));
-        
-        $data['title']="Edit Listing";
-		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
-		$states=$this->website->getstate();
-		$options=array(""=>"Select State");
-		if(is_array($states)){
-			foreach($states as $state){
-				$options[$state['state']]=$state['state'];
-			}
-		}
-		$data['states']=$options;
-        
-		$categories=$this->website->getcategory();
-		$options=array(""=>"Select Category");
-		if(is_array($categories)){
-			foreach($categories as $category){
-				$options[$category['id']]=$category['category'];
-			}
-		}
-		$data['categories']=$options;
-		$data['discounts']=$this->website->getdiscount($data['hospital']['category_id']);
-        $data['ckeditor']=true;
-        
-		$this->template->load('listings','edit',$data);
-	}
-    
-	public function memberlist(){
         $data['title']="Member List";
 		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
 		$data['datatable']=true;
 		
 		$data['members']=$this->member->getmembers();
-		$nurses=$this->nurse->getnurses();
-		$options=array(""=>"Select Nurse");
-		if(is_array($nurses)){
-			foreach($nurses as $nurse){
-				$options[$nurse['id']]=$nurse['name'];
-			}
-		}
-		$data['nurses']=$options;
-		$this->template->load('members','memberlist',$data);
+		$this->template->load('reports','memberlist',$data);
+	}	
+    
+	public function details($id=NULL){
+        $member=$this->member->getmembers(array("t1.id"=>$id),"single");
+        if($id===NULL || empty($member)){
+            redirect(admin_url('reports/'));
+        }
+        $data['title']="Member Report";
+		$data['breadcrumb']=array('/'=>"Home","active"=>$data['title']);
+		$data['datatable']=true;
+		
+		$data['member']=$member;
+        $data['checkups']=$this->nurse->getreport(array("user_id"=>$id));
+		$this->template->load('reports','details',$data);
 	}	
     
 	public function savehca(){
@@ -118,7 +69,6 @@ class Members extends CI_Controller {
                 }
                 $result3=$this->member->insertward($warddata);
                 
-                send_message($data['mobile'],$message);
                 //$smsdata=array($data['mobile']=>$message);
                 //send_sms($smsdata);
                 

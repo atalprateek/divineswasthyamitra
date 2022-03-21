@@ -56,6 +56,14 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li class="<?= activate_menu('reports'); ?>">
+                                            <a href="<?=  admin_url('reports/'); ?>" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon">
+                                                    <i class="fa fa-list"></i>
+                                                </span>
+                                                <span class="pcoded-mtext">Reports</span>
+                                            </a>
+                                        </li>
                                         <li class="pcoded-hasmenu active pcoded-trigger d-none">
                                             <a href="javascript:void(0)" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="feather icon-home"></i></span>

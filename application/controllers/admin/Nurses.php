@@ -104,6 +104,7 @@ class Nurses extends CI_Controller {
                             );
                 $result2=$this->nurse->addnurse($nursedata);
                 
+                send_message($data['mobile'],$message);
                 //$smsdata=array($data['mobile']=>$message);
                 //send_sms($smsdata);
                 
