@@ -180,3 +180,8 @@ table.profile td{
 .work-time ul li.ba-2{
     background-color:  #32b3d5;
 }
+.about-us p{
+    font-size: 1.5em;
+    text-align: justify;
+    margin-bottom: 1em;
+}
