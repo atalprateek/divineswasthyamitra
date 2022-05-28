@@ -36,14 +36,14 @@
   <div class="container">
     <div class="row">
       <div class="flx">
-        <div class="flxcol-5">
+        <?php /*?><div class="flxcol-5">
           <a href="#"><div class="initem">
             <img src="<?= file_url('assets/images/4.png'); ?>">
             <h3>Doctor at Home</h3>
             <p><?= PROJECT_NAME ?>'s team of expert, specialized doctors</p>
             <button class="btn btn-gray btn-round">Know More</button>
           </div></a>
-        </div>
+        </div><?php */?>
         <div class="flxcol-5">
           <a href="#"><div class="initem">
             <img src="<?= file_url('assets/images/3.png'); ?>">
@@ -68,14 +68,14 @@
             <button class="btn btn-gray btn-round">Know More</button>
           </div></a>
         </div>
-        <div class="flxcol-5">
+        <?php /*?><div class="flxcol-5">
           <a href="#"><div class="initem">
             <img src="<?= file_url('assets/images/1.png'); ?>">
             <h3>Medical Equipment at Home</h3>
             <p>Rent & Purchase equipment</p>
             <button class="btn btn-gray btn-round">Know More</button>
           </div></a>
-        </div>
+        </div><?php */?>
       </div>
     </div>
   </div>
@@ -176,15 +176,15 @@
       <div class="flx text-center">
         <div class="col-xs-12 col-md-4 col-sm-4">
           <div class="states">
-            <div class="bgtxt">800+</div>
-            <h2>800+</h2>
+            <div class="bgtxt">80+</div>
+            <h2>80+</h2>
             <p>Employees</p>
           </div>
         </div>
         <div class="col-xs-12 col-md-4 col-sm-4">
           <div class="states">
-            <div class="bgtxt">2Lakh</div>
-            <h2>2Lakh</h2>
+            <div class="bgtxt">1000+</div>
+            <h2>1000+</h2>
             <p>Patient Care Episodes</p>
           </div>
         </div>
