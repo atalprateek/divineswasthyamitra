@@ -65,7 +65,7 @@
                                                             ?>
                                                             <a href="<?= file_url($member['cardfile']); ?>" class="mb-2 btn btn-sm btn-info" download>Download Card</div></a>
                                                             <?php
-                                                                    $text="Update Card No";
+                                                                    $text="Update Card No / Nurse";
                                                                 }
                                                             ?>
                                                             <a href="#" data-toggle="modal" data-value="<?php echo $member['id']; ?>" data-target="#addcardno" class="mb-2 btn btn-sm btn-warning addcard"><?= $text; ?></div></a>

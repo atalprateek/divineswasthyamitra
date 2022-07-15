@@ -172,10 +172,17 @@ class Member_model extends CI_Model{
 		$array=$this->db->get_where("members",$where)->unbuffered_row('array');
 		$filename=generate_slug($array['name'].'-'.$data['card_no']).'.jpg';
 		$data['cardfile']="assets/images/cards/".$filename;
+        $olddata=array();
+        if($array['nurse_id']){
+            $olddata=array("user_id"=>$id,"nurse_id"=>$array['nurse_id'],"added_on"=>date('Y-m-d H:i:s'));
+        }
 		if($this->db->update("members",$data,$where)){
 			$salt=$this->db->get_where("users",array("id"=>$id))->row()->salt;
 			$data=array("id"=>$id,"card_no"=>$data['card_no'],"name"=>$array['name'],"issue"=>$data['issue_date'],"salt"=>$salt);
 			createverticalcard($data);
+            if(!empty($olddata)){
+                $this->db->insert("old_nurse",$olddata);
+            }
             return array("status"=>true,"message"=>"Member Card Added Successfully!");
         }
         else{
