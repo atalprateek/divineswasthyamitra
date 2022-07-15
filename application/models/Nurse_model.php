@@ -75,9 +75,15 @@ class Nurse_model extends CI_Model{
         }
 	}
 	
-    public function getreport($where){
+    public function getreport($where=array(),$type="all"){
         $query=$this->db->get_where("monthly_checkup",$where);
-        $array=$query->result_array();
+        if($type=="all"){
+            $array=$query->result_array();
+        }
+        else{
+            $array=$query->unbuffered_row('array');
+        }
+        
         return $array;
     }
 }

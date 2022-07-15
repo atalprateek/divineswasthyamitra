@@ -20,8 +20,8 @@
                                                     <tr>
                                                         <th>Sl No</th>
                                                         <th>Date</th>
-                                                        <th>Blood Pressure</th>
-                                                        <th>Sugar</th>
+                                                        <th>Blood Pressure (mmHg)</th>
+                                                        <th>Sugar(RBS/FBS/PPBS)(mg/dl)</th>
                                                         <th>SPO2</th>
                                                         <th>Pulse</th>
                                                         <th>Temperatue</th>

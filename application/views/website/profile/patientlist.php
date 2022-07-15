@@ -17,6 +17,7 @@
                                                 <th>Name</th>
                                                 <th>Contact No</th>
                                                 <th>Address</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -37,6 +38,18 @@
                                                     <?php
                                                         if(checkmonthlycheckup($patient['id'])){
                                                             echo '<span class="text-success">Checkup Done</span>';
+                                                        }
+                                                        else{
+                                                            echo '<span class="text-danger">Checkup Pending</span>';
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if(checkmonthlycheckup($patient['id'])){
+                                                    ?>
+                                                    <a href="<?= base_url('monthlyreport/'.$patient['id']); ?>" class="btn btn-sm btn-primary">View Monthly Report</a>
+                                                    <?php 
                                                         }
                                                         else{
                                                     ?>

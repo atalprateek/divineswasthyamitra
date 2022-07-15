@@ -161,6 +161,31 @@ class Profile extends CI_Controller {
 		else{ redirect('patientlist/'); }
 	}
 	
+	public function monthlyreport(){
+		if($this->session->role=='nurse' && $this->uri->segment(2)!==NULL){
+            $user_id=$this->uri->segment(2);
+            $data['title']="Monthly Report";
+            $getuser=$this->account->getuser(array("id"=>$user_id,"role"=>"member"));
+            if($getuser['status']===false){ redirect('patientlist/'); exit; }
+            $data['user']=$getuser['user'];
+            $data['member']=$this->member->getmembers(array("t1.id"=>$user_id),"single");
+            if(md5($data['member']['nurse_id'])!=$this->session->user){ redirect('patientlist/'); exit; }
+            
+            $year=date('Y');
+            $month=date('m');
+            $where="year(date)='$year' and month(date)='$month' and user_id='$user_id'";
+            $data['report']=$this->nurse->getreport($where,"single");
+            if(empty($data['report'])){ redirect('patientlist/'); exit; }
+            
+            $this->load->view('website/includes/top-section',$data);
+            $this->load->view('website/includes/header');
+            $this->load->view('website/profile/monthlycheckup');
+            $this->load->view('website/includes/footer');
+            $this->load->view('website/includes/bottom-section');
+		}
+		else{ redirect('patientlist/'); }
+	}
+	
     public function updateprofile(){
         if($this->input->post('updateprofile')!==NULL){
             $data=$this->input->post();

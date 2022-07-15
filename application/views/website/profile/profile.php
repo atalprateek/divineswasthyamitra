@@ -106,6 +106,11 @@
                                 </a>
                                 <?php
                                 }
+                                else{
+                                ?>
+                                <a href="<?php echo base_url('profile/editprofile/'); ?>" class="btn btn-sm btn-primary">Change Password</a>
+                                <?php
+                                }
                                     if($member['name']!='' && $this->session->role=='member' && $this->session->paid==0){
                                 ?>
                                 <a href="<?php echo base_url('profile/makepayment/');?>" class="btn btn-sm btn-primary">Make Payment</a>

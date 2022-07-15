@@ -73,6 +73,8 @@ $route['logout']='account/logout';
 $route['patientlist']='profile/patientlist';
 $route['monthlycheckup']='profile/monthlycheckup';
 $route['monthlycheckup/(:num)']='profile/monthlycheckup';
+$route['monthlyreport']='profile/monthlyreport';
+$route['monthlyreport/(:num)']='profile/monthlyreport';
 
 $route['admin/logout']='admin/login/logout';
 

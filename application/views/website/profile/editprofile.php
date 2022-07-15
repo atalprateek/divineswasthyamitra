@@ -1,5 +1,5 @@
 
-
+    <?php if($this->session->role=='member'){ ?>
     <div class="margin-tb-30px">
         <div class="container">
             <div class="row">
@@ -140,7 +140,7 @@
             </div>
         </div>
     </div>
-
+    <?php }else{echo "<br><br><br>"; } ?>
     <div class="margin-tb-30px">
         <div class="container">
             <div class="row">
@@ -177,6 +177,7 @@
         </div>
     </div>
    	
+    <?php if($this->session->role!='member'){ echo "<br><br><br>"; }?>
 	<?php
     	if($this->session->paid==1 && $this->session->role=='member' && false){
 	?>
