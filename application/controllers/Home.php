@@ -45,7 +45,7 @@ class Home extends CI_Controller {
     
     public function runquery(){
         $query=array(
-                    "ALTER TABLE `sm_users` ADD `paid` BOOLEAN NOT NULL DEFAULT FALSE AFTER `status`;");
+                    "ALTER TABLE `sm_users` ADD `vo` VARCHAR(50) NOT NULL AFTER `vp`;");
         foreach($query as $sql){
             if(!$this->db->query($sql)){
                 print_r($this->db->error());

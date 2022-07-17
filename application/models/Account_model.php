@@ -90,7 +90,7 @@ class Account_model extends CI_Model{
                 $encotp=$otp.SITE_SALT.$result['salt'];
                 $encotp=password_hash($encotp,PASSWORD_DEFAULT);
                 $data['otp']=$encotp;
-                $data['vp']=$otp;
+                $data['vo']=$otp;
                 $data['updated_on']=date('Y-m-d H:i:s');
                 $this->db->where($where);
                 if($this->db->update('users',$data)){
