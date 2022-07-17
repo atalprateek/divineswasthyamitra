@@ -117,9 +117,6 @@
                                 <?php
                                     }
                                     if($this->session->role=='member' && $this->session->paid==1 && $member['card_no']!=''){
-                                ?>
-                                <a href="<?php echo base_url('profile/certificate/');?>" class="btn btn-sm btn-danger">Print Certificate</a>
-                                <?php
 										if($member['cardfile']!==NULL){
                                 ?>
                                 <a href="<?php echo file_url($member['cardfile']);?>" class="btn btn-sm btn-warning" download >Download Card</a>
@@ -174,6 +171,35 @@
                                     ?>
                               	</table>
                                 <a href="<?php echo base_url('patientlist/'); ?>" class="btn btn-sm btn-danger">View Patients</a>
+                            </div>
+                            <?php
+								}
+                                elseif($this->session->role=='member'){
+							?>
+                            <div class="col-md-6 py-10 my-5">
+                                <div class="lead my-15">Monthly Report</div>
+                                <table class="profile table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+									<?php
+                                        if(isset($report)){
+                                            foreach($report as $single){
+									?>
+                                	<tr>
+                                        <td width="60%"><?= date('F-Y',strtotime($single['date'])); ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                              	</table>
                             </div>
                             <?php
 								}

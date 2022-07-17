@@ -30,6 +30,7 @@ class Profile extends CI_Controller {
         }
         elseif($this->session->role=='member'){
 			$data['ward']=$this->member->getwards(array("id"=>$data['member']['ward']),"single");
+            $data['report']=$this->nurse->getreport(array("user_id"=>$data['user']['id']));
         }
 		$this->load->view('website/includes/top-section',$data);
 		$this->load->view('website/includes/header');
